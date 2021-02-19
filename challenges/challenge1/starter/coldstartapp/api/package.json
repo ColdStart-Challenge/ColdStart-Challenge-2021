@@ -1,0 +1,14 @@
+{
+  "name": "coldstart-functions",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "@azure/storage-queue": "^12.3.0",
+    "tedious": "^11.0.3"
+  },
+  "devDependencies": {}
+}
