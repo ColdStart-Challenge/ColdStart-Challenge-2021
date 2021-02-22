@@ -17,14 +17,13 @@ export default {
     const { clientPrincipal } = payload;
     console.log(clientPrincipal);
     // return clientPrincipal;
+    return {
+      userInfo: clientPrincipal
+    };
   } catch (error) {
     console.error('No profile could be found');
-    // return undefined;
+    return undefined;
   }
-
-    return {
-      "userInfo": clientPrincipal
-    };
   },
   methods: {
   },
