@@ -22,6 +22,7 @@ export default {
       <div class="navbar-menu">
         <div class="navbar-start">
           <router-link class="navbar-item nav-home" to="/">Home</router-link>
+          <router-link class="navbar-item nav-auth-link" to="/login">Login</router-link>
         </div>
       </div>
     </nav>
