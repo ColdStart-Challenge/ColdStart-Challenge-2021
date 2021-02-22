@@ -15,10 +15,18 @@ export default {
       const response = fetch(`${API}/.auth/me`);
       const payload = response.json();
       const { clientPrincipal } = payload;
+      if(payload.clientPrincipal){
+        return {
+          isAuthenticated: true
+        };
+      }else{
+        return {
+          isAuthenticated: false
+        };
+      }
+
       console.log(clientPrincipal);
-      return {
-        userInfo: clientPrincipal
-      };
+      
     } catch (error) {
       console.error('No profile could be found');
       return undefined;
@@ -36,10 +44,10 @@ export default {
       <div class="navbar-menu">
         <div class="navbar-start">
           <router-link class="navbar-item nav-home" to="/">Home</router-link>
-          <div v-if="clientPrincipal">
+          <div v-if="isAuthenticated">
             <router-link class="navbar-item nav-auth-link" to="/login">Login</router-link>
             </div>
-          <div v-if="!clientPrincipal">
+          <div v-if="!isAuthenticated">
             <router-link class="navbar-item nav-auth-link" to="/logout">logout</router-link>
           </div>
         </div>
