@@ -39,7 +39,7 @@ This coding challenge is being organized in a collaboration between Microsoft an
 
 This is the story of two penguins who are taking their first steps as startup founders. They are planning to begin an ice cream parlor and home delivery service, called **ColdStart** 🍨.
 
-Six months ago, the pinguin siblings' grandmother retired. She left them the ice cream recipe that has been in the family for many generations. Now both penguins decided to start an ice cream business 🍧! However, they have no clue of how to build and host a website, process customer orders and track and trace the home deliveries. They're calling on you for help!
+Six months ago, the penguin siblings' grandmother retired. She left them the ice cream recipe that has been in the family for many generations. Now both penguins decided to start an ice cream business 🍧! However, they have no clue of how to build and host a website, process customer orders and track and trace the home deliveries. They're calling on you for help!
 
 You will use the Microsoft Azure cloud services to build all of the IT infrastructure needed for running their entire business. 
 
