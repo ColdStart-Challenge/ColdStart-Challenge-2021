@@ -3,6 +3,7 @@
 This is the story of two penguins who are taking their first steps as small business owners. They plan to open an ice cream parlor and do home deliveries, under the **ColdStart** 🍨 brand. But how did it all begin?
 
 ![Emperor Penguin](./assets/2007_Snow-Hill-Island_Luyten-De-Hauwere-Emperor-Penguin-56.jpg)
+*Image from [Denis Luyten](https://commons.wikimedia.org/wiki/File:2007_Snow-Hill-Island_Luyten-De-Hauwere-Emperor-Penguin-56.jpg)*
 
 ## A hidden gem
 
