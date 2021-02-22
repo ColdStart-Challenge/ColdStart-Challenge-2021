@@ -22,11 +22,11 @@ export default {
         };
       }
       return {
-        isAuthenticated: false
+        isAuthenticated: false,
       };
     } catch (error) {
-        console.error('No profile could be found');
-        return undefined;
+      console.error('No profile could be found');
+      return undefined;
     }
   },
   methods: {
