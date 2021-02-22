@@ -11,7 +11,10 @@ export default {
   },
   data() {
     try {
+      
       console.log('getUserInfo');
+      const ui = getUserInfo();
+      console.log(ui);
       const response = fetch(`/.auth/me`);
       const payload = response.json();
       const { clientPrincipal } = payload;
@@ -30,6 +33,19 @@ export default {
     }
   },
   methods: {
+    getUserInfo() {
+  try {
+    console.log('getUserInfo');
+    const response = fetch('/.auth/me');
+    const payload = response.json();
+    const { clientPrincipal } = payload;
+    console.log(clientPrincipal);
+    return clientPrincipal;
+  } catch (error) {
+    console.error('No profile could be found');
+    return undefined;
+  }
+}
   },
 };
 </script>
