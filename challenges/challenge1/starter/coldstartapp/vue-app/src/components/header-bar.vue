@@ -15,6 +15,7 @@ export default {
       const response = fetch(`${API}/.auth/me`);
       const payload = response.json();
       const { clientPrincipal } = payload;
+      console.log(clientPrincipal);
       if (payload.clientPrincipal) {
         return {
           isAuthenticated: true,
@@ -23,16 +24,13 @@ export default {
       return {
         isAuthenticated: false
       };
-    }
-      console.log(clientPrincipal);
-      
     } catch (error) {
-      console.error('No profile could be found');
-      return undefined;
+        console.error('No profile could be found');
+        return undefined;
     }
   },
   methods: {
-  },
+  }
 };
 </script>
 
