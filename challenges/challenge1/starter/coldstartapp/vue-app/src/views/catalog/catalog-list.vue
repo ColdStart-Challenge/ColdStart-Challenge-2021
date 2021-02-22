@@ -45,12 +45,8 @@ export default {
             :description="icecream.Description"
             :imageurl="icecream.ImageUrl"
           />
-          <ButtonFooter 
-            :className="icecream.Id"
-            :label="icecream.Id"
-            :dataIndex="icecream.Id"
-            :dataId="icecream.Id"
-            :iconClasses="icecream.Id"
+          <ButtonFooter
+            :item="icecream"
           />
         </div>
       </div>
