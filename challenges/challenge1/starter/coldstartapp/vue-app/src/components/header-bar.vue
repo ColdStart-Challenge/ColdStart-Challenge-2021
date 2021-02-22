@@ -15,16 +15,15 @@ export default {
       const response = fetch(`${API}/.auth/me`);
       const payload = response.json();
       const { clientPrincipal } = payload;
-      if(payload.clientPrincipal){
+      if (payload.clientPrincipal) {
         return {
-          isAuthenticated: true
-        };
-      }else{
-        return {
-          isAuthenticated: false
+          isAuthenticated: true,
         };
       }
-
+      return {
+        isAuthenticated: false
+      };
+    }
       console.log(clientPrincipal);
       
     } catch (error) {
