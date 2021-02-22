@@ -12,8 +12,8 @@ export default {
   data() {
       try {
     console.log('getUserInfo');
-    const response = await fetch(`${API}/.auth/me`);
-    const payload = await response.json();
+    const response = fetch(`${API}/.auth/me`);
+    const payload = response.json();
     const { clientPrincipal } = payload;
     console.log(clientPrincipal);
     // return clientPrincipal;
