@@ -4,16 +4,16 @@
       "route": "/api/catalog"
     },
     {
+      "route": "/login",
+      "serve": "/.auth/login/github"
+    },
+    {
       "route": "/*",
       "serve": "/index.html",
       "statusCode": 200,
       "allowedRoles": [
         "authenticated"
       ]
-    },
-    {
-      "route": "/login",
-      "serve": "/.auth/login/github"
     }
   ],
   "platformErrorOverrides": [
