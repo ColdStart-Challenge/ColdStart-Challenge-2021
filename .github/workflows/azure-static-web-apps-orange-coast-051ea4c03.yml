@@ -31,9 +31,7 @@ jobs:
           api_location: "challenges=challenge1/starter=coldstartapp/api" # Api source code path - optional
           output_location: "dist" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
-
-          challenges=challenge1/starter=coldstartapp/api
-
+  
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
