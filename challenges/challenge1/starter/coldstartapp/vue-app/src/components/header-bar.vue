@@ -12,7 +12,7 @@ export default {
   data() {
     try {
       console.log('getUserInfo');
-      const response = fetch(`${API}/.auth/me`);
+      const response = fetch(`/.auth/me`);
       const payload = response.json();
       const { clientPrincipal } = payload;
       console.log(clientPrincipal);
