@@ -2,7 +2,7 @@
 import HeaderBarBrand from '@/components/header-bar-brand.vue';
 
 // import axios from 'axios';
-import API from '../store/config';
+// import API from '../store/config';
 
 export default {
   name: 'HeaderBar',
