@@ -4,16 +4,30 @@ import HeaderBarBrand from '@/components/header-bar-brand.vue';
 // import axios from 'axios';
 // import API from '../store/config';
 
+async function getUserInfo() {
+  try {
+    console.log('getUserInfo');
+    const response = await fetch('/.auth/me');
+    const payload = await response.json();
+    const { clientPrincipal } = payload;
+    console.log(clientPrincipal);
+    return clientPrincipal;
+  } catch (error) {
+    console.error('No profile could be found');
+    return undefined;
+  }
+}
+
+
 export default {
   name: 'HeaderBar',
   components: {
     HeaderBarBrand,
   },
   data() {
-    try {
-      
+    try {      
       console.log('getUserInfo');
-      const ui = getUserInfo();
+      const ui = await getUserInfo();
       console.log(ui);
       const response = fetch(`/.auth/me`);
       const payload = response.json();
