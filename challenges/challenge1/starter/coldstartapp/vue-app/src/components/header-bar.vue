@@ -9,16 +9,18 @@ export default {
   },
   data() {
     try {
-      const userInfo = await getUserInfo();
-      console.log(userInfo);
-      if (userInfo) {
+      const userInfo = getUserInfo();
+      userInfo.then((result) => {
+        console.log(result);
         return {
           isAuthenticated: true,
         };
-      }
-      return {
-        isAuthenticated: false,
-      };
+      }, (err) => {
+        console.error(err);
+        return {
+          isAuthenticated: false,
+        };
+      });
     } catch (error) {
       console.log(error);
       console.error('No profile could be found');
