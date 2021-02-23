@@ -41,10 +41,10 @@ export default {
       <div class="navbar-menu">
         <div class="navbar-start">
           <router-link class="navbar-item nav-home" to="/">Home</router-link>
-          <router-link v-if="!isAuthenticated" class="navbar-item nav-auth-link" to="/login">
+          <router-link v-if="isAuthenticated === true" class="navbar-item nav-auth-link" to="/logout">
+            Logout</router-link>
+          <router-link v-else class="navbar-item nav-auth-link" to="/login">
             Login</router-link>
-          <router-link v-if="isAuthenticated" class="navbar-item nav-auth-link" to="/logout">
-            logout</router-link>
         </div>
       </div>
     </nav>
