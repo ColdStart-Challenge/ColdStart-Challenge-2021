@@ -8,7 +8,7 @@ export default {
     HeaderBarBrand,
   },
   data() {
-    try {      
+    try {
       const userInfo = UserInfo.getUserInfo();
       if (userInfo) {
         return {
@@ -25,7 +25,7 @@ export default {
       };
     }
   },
-  methods: {    
+  methods: {
   },
 };
 </script>
