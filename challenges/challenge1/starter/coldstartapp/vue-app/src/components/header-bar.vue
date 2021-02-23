@@ -16,7 +16,7 @@ export default {
       isAuthenticated: false,
     };
   },
-  created() {
+  mounted() {
     this.getIsAuthenticated();
   },
   methods: {
@@ -40,10 +40,11 @@ export default {
             Logout</router-link>
           <router-link v-else class="navbar-item nav-auth-link" to="/login">
             Login</router-link> -->
+          <AuthLogout v-if="isAuthenticated === true"><AuthLogout>
+          <AuthLogin v-if="isAuthenticated === false"><AuthLogin>
         </div>
       </div>
-      <AuthLogout v-if="isAuthenticated === true"><AuthLogout>
-      <AuthLogin v-if="isAuthenticated === false" ><AuthLogin>
+
     </nav>
   </header>
 </template>
