@@ -1,23 +1,6 @@
 <script>
 import HeaderBarBrand from '@/components/header-bar-brand.vue';
-
-// import axios from 'axios';
-// import API from '../store/config';
-
-async function getUserInfo() {
-  try {
-    console.log('getUserInfo');
-    const response = await fetch('/.auth/me');
-    const payload = await response.json();
-    const { clientPrincipal } = payload;
-    console.log(clientPrincipal);
-    return clientPrincipal;
-  } catch (error) {
-    console.error('No profile could be found');
-    return undefined;
-  }
-}
-
+import UserInfo from '@/assets/js/userInfo';
 
 export default {
   name: 'HeaderBar',
@@ -26,14 +9,8 @@ export default {
   },
   data() {
     try {      
-      console.log('getUserInfo');
-      const ui = await getUserInfo();
-      console.log(ui);
-      const response = fetch(`/.auth/me`);
-      const payload = response.json();
-      const { clientPrincipal } = payload;
-      console.log(clientPrincipal);
-      if (payload.clientPrincipal) {
+      const userInfo = UserInfo.getUserInfo();
+      if (userInfo) {
         return {
           isAuthenticated: true,
         };
@@ -43,23 +20,12 @@ export default {
       };
     } catch (error) {
       console.error('No profile could be found');
-      return undefined;
+      return {
+        isAuthenticated: false,
+      };
     }
   },
-  methods: {
-    getUserInfo() {
-  try {
-    console.log('getUserInfo');
-    const response = fetch('/.auth/me');
-    const payload = response.json();
-    const { clientPrincipal } = payload;
-    console.log(clientPrincipal);
-    return clientPrincipal;
-  } catch (error) {
-    console.error('No profile could be found');
-    return undefined;
-  }
-}
+  methods: {    
   },
 };
 </script>
