@@ -2,8 +2,6 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import catalogModule from './modules/catalog';
 
-export * from './modules/mutation-types';
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
