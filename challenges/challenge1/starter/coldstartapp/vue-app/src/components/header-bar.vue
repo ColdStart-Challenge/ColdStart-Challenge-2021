@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       isAuthenticated: false,
-      provider: "github"
+      provider: 'github',
     };
   },
   mounted() {
