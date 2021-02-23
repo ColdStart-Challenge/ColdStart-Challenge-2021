@@ -8,32 +8,9 @@ export default {
     HeaderBarBrand,
   },
   data() {
-    try {
-      const userInfo = getUserInfo();
-      const res = userInfo.then((result) => {
-        console.log(result);
-        if (result === null) {
-          return {
-            isAuthenticated: false,
-          };
-        }
-        return {
-          isAuthenticated: true,
-        };
-      }, (err) => {
-        console.error(err);
-        return {
-          isAuthenticated: false,
-        };
-      });
-      return res;
-    } catch (error) {
-      console.log(error);
-      console.error('No profile could be found');
-      return {
-        isAuthenticated: false,
-      };
-    }
+    return {
+      isAuthenticated: getUserInfo().then((r) => (r !== null), () => false),
+    };
   },
   methods: {
   },
