@@ -14,7 +14,6 @@ export default {
   data() {
     return {
       isAuthenticated: false,
-      provider: 'github',
     };
   },
   mounted() {
@@ -41,8 +40,9 @@ export default {
             Logout</router-link>
           <router-link v-else class="navbar-item nav-auth-link" to="/login">
             Login</router-link> -->
-          <AuthLogin provider="github"><AuthLogin>
-          <AuthLogout><AuthLogout>
+          <AuthLogin provider="github"></AuthLogin>
+          <AuthLogin provider="facebook"></AuthLogin>
+          <AuthLogout></AuthLogout>
         </div>
       </div>
 
