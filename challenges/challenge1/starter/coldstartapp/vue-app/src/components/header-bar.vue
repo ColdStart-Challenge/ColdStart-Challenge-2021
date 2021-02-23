@@ -9,10 +9,17 @@ export default {
   },
   data() {
     return {
-      isAuthenticated: getUserInfo().then((r) => (r !== null), () => false),
+      isAuthenticated: false,
     };
   },
+  created() {
+    this.getIsAuthenticated();
+  },
   methods: {
+    getIsAuthenticated() {
+      getUserInfo().then((r) => { this.isAuthenticated = (r !== null); },
+        () => { this.isAuthenticated = false; });
+    },
   },
 };
 </script>
