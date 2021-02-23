@@ -10,7 +10,7 @@ export default {
   data() {
     try {
       const userInfo = getUserInfo();
-      userInfo.then((result) => {
+      const res = userInfo.then((result) => {
         console.log(result);
         if (result === null) {
           return {
@@ -26,6 +26,7 @@ export default {
           isAuthenticated: false,
         };
       });
+      return res;
     } catch (error) {
       console.log(error);
       console.error('No profile could be found');
