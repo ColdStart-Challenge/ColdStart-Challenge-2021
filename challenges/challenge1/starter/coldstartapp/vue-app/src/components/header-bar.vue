@@ -9,7 +9,7 @@ export default {
   },
   data() {
     try {
-      const userInfo = getUserInfo();
+      const userInfo = await getUserInfo();
       console.log(userInfo);
       if (userInfo) {
         return {
