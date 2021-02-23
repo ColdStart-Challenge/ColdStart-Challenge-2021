@@ -9,8 +9,9 @@ export default {
   },
   data() {
     try {
-      console.log(getUserInfo);
-      if (getUserInfo) {
+      const userInfo = getUserInfo();
+      console.log(userInfo);
+      if (userInfo) {
         return {
           isAuthenticated: true,
         };
