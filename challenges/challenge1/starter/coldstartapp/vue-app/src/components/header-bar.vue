@@ -1,11 +1,15 @@
 <script>
 import HeaderBarBrand from '@/components/header-bar-brand.vue';
 import getUserInfo from '@/assets/js/userInfo';
+import AuthLogin from '@/components/auth-login.vue';
+import AuthLogout from '@/components/auth-logout.vue';
 
 export default {
   name: 'HeaderBar',
   components: {
     HeaderBarBrand,
+    AuthLogin,
+    AuthLogout,
   },
   data() {
     return {
@@ -30,15 +34,16 @@ export default {
       <HeaderBarBrand></HeaderBarBrand>
       <div class="navbar-menu">
         <div class="navbar-start">
-          <div v-text="isAuthenticated"></div>
           <router-link class="navbar-item nav-home" to="/">Home</router-link>
-          <router-link v-if="isAuthenticated === true"
+          <!-- <router-link v-if="isAuthenticated === true"
             class="navbar-item nav-auth-link" to="/logout">
             Logout</router-link>
           <router-link v-else class="navbar-item nav-auth-link" to="/login">
-            Login</router-link>
+            Login</router-link> -->
         </div>
       </div>
+      <AuthLogout v-if="isAuthenticated === true"><AuthLogout>
+      <AuthLogin v-if="isAuthenticated === false" ><AuthLogin>
     </nav>
   </header>
 </template>
