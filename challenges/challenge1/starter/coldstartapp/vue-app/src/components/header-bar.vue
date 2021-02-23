@@ -23,6 +23,7 @@ export default {
       <HeaderBarBrand></HeaderBarBrand>
       <div class="navbar-menu">
         <div class="navbar-start">
+          <div v-text="isAuthenticated"></div>
           <router-link class="navbar-item nav-home" to="/">Home</router-link>
           <router-link v-if="isAuthenticated === true"
             class="navbar-item nav-auth-link" to="/logout">
