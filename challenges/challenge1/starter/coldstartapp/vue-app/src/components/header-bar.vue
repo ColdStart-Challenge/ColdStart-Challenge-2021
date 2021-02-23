@@ -12,6 +12,11 @@ export default {
       const userInfo = getUserInfo();
       userInfo.then((result) => {
         console.log(result);
+        if (result === null) {
+          return {
+            isAuthenticated: false,
+          };
+        }
         return {
           isAuthenticated: true,
         };
