@@ -1,6 +1,6 @@
 <script>
 import HeaderBarBrand from '@/components/header-bar-brand.vue';
-import UserInfo from '@/assets/js/userInfo';
+import getUserInfo from '@/assets/js/userInfo';
 
 export default {
   name: 'HeaderBar',
@@ -9,7 +9,7 @@ export default {
   },
   data() {
     try {
-      const userInfo = UserInfo.getUserInfo();
+      const userInfo = getUserInfo.getUserInfo();
       console.log(userInfo);
       if (userInfo) {
         return {
@@ -20,6 +20,7 @@ export default {
         isAuthenticated: false,
       };
     } catch (error) {
+      console.log(error);
       console.error('No profile could be found');
       return {
         isAuthenticated: false,
@@ -38,9 +39,9 @@ export default {
       <div class="navbar-menu">
         <div class="navbar-start">
           <router-link class="navbar-item nav-home" to="/">Home</router-link>
-          <router-link v-if="isAuthenticated" class="navbar-item nav-auth-link" to="/login">
+          <router-link v-if="!isAuthenticated" class="navbar-item nav-auth-link" to="/login">
             Login</router-link>
-          <router-link v-if="!isAuthenticated" class="navbar-item nav-auth-link" to="/logout">
+          <router-link v-if="isAuthenticated" class="navbar-item nav-auth-link" to="/logout">
             logout</router-link>
         </div>
       </div>
