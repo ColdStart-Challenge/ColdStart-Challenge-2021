@@ -4,7 +4,7 @@ export default {
   props: {
     provider: {
       type: String,
-      default: () => 'github',
+      default: () => '',
     },
   },
   methods: {
