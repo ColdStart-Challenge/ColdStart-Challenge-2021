@@ -1,7 +1,4 @@
 <script>
-
-import getUserInfo from '@/assets/js/userInfo';
-
 export default {
   name: 'ButtonFooter',
   props: {
@@ -32,25 +29,9 @@ export default {
   methods: {
     handleClick() {
       console.log(this.item);
-
-      // const str = JSON.stringify(this.item);
-      // console.log(str);
-      // this.$emit('clicked', str);
-
       this.$emit('clicked', this.item);
     },
-    getIsAuthenticated() {
-      getUserInfo().then((r) => { this.isAuthenticated = (r !== null); },
-        () => { this.isAuthenticated = false; });
-    },
-  },
-  data() {
-    return {
-      isAuthenticated: false,
-    };
-  },
-  mounted() {
-    this.getIsAuthenticated();
+
   },
 };
 </script>
