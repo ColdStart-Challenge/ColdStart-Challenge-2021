@@ -98,6 +98,7 @@ export default {
           <ButtonFooter @clicked="clicked"
             :item="icecream"
             label="Add To Cart"
+            class="primary"
             v-if="isAuthenticated === true"
           />
         </div>
