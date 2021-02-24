@@ -29,6 +29,7 @@ export default {
   methods: {
     handleClick() {
       console.log(this.item);
+      console.log(JSON.stringify(this.item));
       this.$emit('clicked', this.item);
     },
   },

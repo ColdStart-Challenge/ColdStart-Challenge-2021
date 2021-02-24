@@ -25,7 +25,21 @@ export default {
   methods: {
     clicked: ({ item }) => {
       console.log(item);
-      if (item) {
+      const o = JSON.parse(item);
+      console.log(o);
+
+      // {
+      //     "Id": "0B476647-586A-EB11-9889-000D3AB17657",
+      //     "User": "Pip Doe",
+      //     "Date": "2021-02-08T21:54:56.260Z",
+      //     "IcecreamId": 1,
+      //     "Status": "New",
+      //     "DriverId": null,
+      //     "FullAddress": "1 Microsoft Way, Redmond, WA 98052, USA",
+      //     "LastPosition": null
+      // }
+
+      if (item.Id) {
         console.log('Valid submit event payload!');
         return true;
       }
@@ -55,7 +69,7 @@ export default {
             :imageurl="icecream.ImageUrl"
           />
           <ButtonFooter @clicked="clicked"
-            :item="icecream.Name"
+            :item="icecream"
             label="Add To Cart"
           />
         </div>
