@@ -23,7 +23,7 @@ export default {
     };
   },
   methods: {
-    clicked: ({ item }) => {
+    clicked: (item) => {
       console.log(item);
       const o = JSON.parse(item);
       console.log(o);
@@ -39,6 +39,17 @@ export default {
       //     "LastPosition": null
       // }
 
+      if (item.Id) {
+        console.log('Valid submit event payload!');
+        return true;
+      }
+      console.warn('Invalid submit event payload!');
+      return false;
+    },
+    clicked2(item) {
+      console.log(item);
+      const o = JSON.parse(item);
+      console.log(o);
       if (item.Id) {
         console.log('Valid submit event payload!');
         return true;
