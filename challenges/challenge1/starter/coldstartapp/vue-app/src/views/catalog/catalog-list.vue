@@ -2,6 +2,7 @@
 import CardContent from '@/components/card-content.vue';
 import ButtonFooter from '@/components/button-footer.vue';
 import getUserInfo from '@/assets/js/userInfo';
+import uuid from 'vue-uuid';
 
 export default {
   name: 'CatalogList',
@@ -22,7 +23,7 @@ export default {
   data() {
     return {
       isAuthenticated: false,
-      userDetails: 'unknown',
+      user: {},
     };
   },
   mounted() {
@@ -34,10 +35,10 @@ export default {
       if (item.Id) {
         console.log('Valid submit event payload!');
         const ret = {
-          Id: item.Id,
-          User: 'Pip Doe',
-          Date: '2021-02-08T21:54:56.260Z',
-          IcecreamId: 1,
+          Id: this.uuid.v1(),
+          User: this.user.userDetails,
+          Date: Date.now().toString(),
+          IcecreamId: item.Id,
           Status: 'New',
           DriverId: null,
           FullAddress: '1 Microsoft Way, Redmond, WA 98052, USA',
@@ -53,10 +54,10 @@ export default {
       getUserInfo().then((r) => {
         console.log(r);
         this.isAuthenticated = (r !== null);
-        this.userDetails = r.clientPrincipal.userDetails;
+        this.user = r;
       },
       () => {
-        this.userDetails = 'unknown';
+        this.user = {};
       });
     },
   },
