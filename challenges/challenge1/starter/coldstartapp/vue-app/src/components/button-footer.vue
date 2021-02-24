@@ -32,9 +32,12 @@ export default {
   methods: {
     handleClick() {
       console.log(this.item);
-      const str = JSON.stringify(this.item);
-      console.log(str);
-      this.$emit('clicked', str);
+
+      // const str = JSON.stringify(this.item);
+      // console.log(str);
+      // this.$emit('clicked', str);
+
+      this.$emit('clicked', this.item);
     },
     getIsAuthenticated() {
       getUserInfo().then((r) => { this.isAuthenticated = (r !== null); },

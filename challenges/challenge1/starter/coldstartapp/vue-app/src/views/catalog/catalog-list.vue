@@ -25,8 +25,9 @@ export default {
   methods: {
     clicked: (item) => {
       console.log(item);
-      const o = JSON.parse(item);
-      console.log(o);
+
+      // const o = JSON.parse(item);
+      // console.log(o);
 
       // {
       //     "Id": "0B476647-586A-EB11-9889-000D3AB17657",
@@ -40,6 +41,7 @@ export default {
       // }
 
       if (item.Id) {
+      // if (o.Id) {
         console.log('Valid submit event payload!');
         return true;
       }
