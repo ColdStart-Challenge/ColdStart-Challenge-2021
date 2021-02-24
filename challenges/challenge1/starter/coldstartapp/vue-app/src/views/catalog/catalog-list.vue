@@ -40,7 +40,7 @@ export default {
         const ret = {
           Id: this.guid.toUpperCase(),
           User: this.user.userDetails,
-          Date: Date.now().toJSON(),
+          Date: new Date().toISOString(),
           IcecreamId: item.Id,
           Status: 'New',
           DriverId: null,
