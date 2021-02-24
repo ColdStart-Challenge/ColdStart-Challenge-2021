@@ -2,7 +2,7 @@
 import CardContent from '@/components/card-content.vue';
 import ButtonFooter from '@/components/button-footer.vue';
 import getUserInfo from '@/assets/js/userInfo';
-import uuid from 'vue-uuid';
+import VueUUID from 'vue-uuid';
 
 export default {
   name: 'CatalogList',
@@ -35,7 +35,7 @@ export default {
       if (item.Id) {
         console.log('Valid submit event payload!');
         const ret = {
-          Id: this.uuid.v1(),
+          Id: this.getGUID(),
           User: this.user.userDetails,
           Date: Date.now().toString(),
           IcecreamId: item.Id,
@@ -59,6 +59,9 @@ export default {
       () => {
         this.user = {};
       });
+    },
+    getGUID() {
+      return VueUUID.$uuid.v1();
     },
   },
 };
