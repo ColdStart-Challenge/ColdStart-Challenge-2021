@@ -32,7 +32,7 @@ export default {
     this.getGUID();
   },
   methods: {
-    clicked: (item) => {
+    clicked(item) {
       console.log(item);
       if (item.Id) {
         console.log('Valid submit event payload!');
