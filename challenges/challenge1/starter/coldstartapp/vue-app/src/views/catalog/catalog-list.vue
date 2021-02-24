@@ -34,8 +34,9 @@ export default {
       console.log(item);
       if (item.Id) {
         console.log('Valid submit event payload!');
+        const guid = this.getGUID();
         const ret = {
-          Id: this.getGUID(),
+          Id: guid,
           User: this.user.userDetails,
           Date: Date.now().toString(),
           IcecreamId: item.Id,
@@ -61,7 +62,7 @@ export default {
       });
     },
     getGUID() {
-      return VueUUID.$uuid.v1();
+      return VueUUID.v1();
     },
   },
 };
