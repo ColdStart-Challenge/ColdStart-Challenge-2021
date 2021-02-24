@@ -23,6 +23,14 @@ export default {
     };
   },
   methods: {
+    clicked: ({ item }) => {
+      if (item) {
+        console.log('Valid submit event payload!');
+        return true;
+      }
+      console.warn('Invalid submit event payload!');
+      return false;
+    },
   },
 };
 </script>
@@ -45,8 +53,9 @@ export default {
             :description="icecream.Description"
             :imageurl="icecream.ImageUrl"
           />
-          <ButtonFooter
+          <ButtonFooter @clicked="clicked"
             :item="icecream"
+            label="Add To Cart"
           />
         </div>
       </div>

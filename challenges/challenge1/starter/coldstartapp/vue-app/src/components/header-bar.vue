@@ -40,9 +40,12 @@ export default {
             Logout</router-link>
           <router-link v-else class="navbar-item nav-auth-link" to="/login">
             Login</router-link> -->
-          <AuthLogin provider="github"></AuthLogin>
-          <AuthLogin provider="facebook"></AuthLogin>
-          <AuthLogout></AuthLogout>
+          <AuthLogin class="navbar-item nav-auth-link"
+            v-if="isAuthenticated === false" provider="github"></AuthLogin>
+          <AuthLogin class="navbar-item nav-auth-link"
+            v-if="isAuthenticated === false" provider="facebook"></AuthLogin>
+          <AuthLogout class="navbar-item nav-auth-link"
+            v-if="isAuthenticated === true"></AuthLogout>
         </div>
       </div>
 
