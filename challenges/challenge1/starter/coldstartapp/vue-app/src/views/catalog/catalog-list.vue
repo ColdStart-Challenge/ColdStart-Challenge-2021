@@ -2,7 +2,7 @@
 import CardContent from '@/components/card-content.vue';
 import ButtonFooter from '@/components/button-footer.vue';
 import getUserInfo from '@/assets/js/userInfo';
-// import VueUUID from 'vue-uuid';
+import { QueueServiceClient } from '@azure/storage-queue';
 
 export default {
   name: 'CatalogList',
@@ -48,10 +48,41 @@ export default {
           LastPosition: null,
         };
         console.log(ret);
+
+        this.addMessageToQueue(ret);
+
         return true;
       }
       console.warn('Invalid submit event payload!');
       return false;
+    },
+    async addMessageToQueue(ret) {
+      // Retrieve the connection from an environment
+      // variable called AZURE_STORAGE_CONNECTION_STRING
+      const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING;
+
+      // Create a unique name for the queue
+      const queueName = 'preorder';
+
+      console.log('Preordering queue: ', queueName);
+
+      // Instantiate a QueueServiceClient which will be used
+      // to create a QueueClient and to list all the queues
+      const queueServiceClient = QueueServiceClient.fromConnectionString(connectionString);
+
+      // Get a QueueClient which will be used
+      // to create and manipulate a queue
+      const queueClient = queueServiceClient.getQueueClient(queueName);
+
+      // Create the queue
+      // await queueClient.create();
+
+      const retStr = JSON.stringify(ret);
+
+      console.log('Adding message to the queue: ', retStr);
+
+      // Add a message to the queue
+      await queueClient.sendMessage(retStr);
     },
     getIsAuthenticated() {
       getUserInfo().then((r) => {
