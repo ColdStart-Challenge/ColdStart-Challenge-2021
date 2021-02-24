@@ -55,7 +55,7 @@ export default {
             :imageurl="icecream.ImageUrl"
           />
           <ButtonFooter @clicked="clicked"
-            :item="item.Name"
+            :item="icecream.Name"
             label="Add To Cart"
           />
         </div>
