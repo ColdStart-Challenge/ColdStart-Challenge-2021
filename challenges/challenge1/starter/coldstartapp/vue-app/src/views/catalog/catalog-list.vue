@@ -24,6 +24,7 @@ export default {
   },
   methods: {
     clicked: ({ item }) => {
+      console.log(item);
       if (item) {
         console.log('Valid submit event payload!');
         return true;
