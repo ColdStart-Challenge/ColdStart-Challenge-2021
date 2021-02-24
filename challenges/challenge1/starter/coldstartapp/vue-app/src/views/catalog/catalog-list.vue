@@ -36,10 +36,11 @@ export default {
       console.log(item);
       if (item.Id) {
         console.log('Valid submit event payload!');
+        this.getGUID();
         const ret = {
-          Id: this.guid,
+          Id: this.guid.toUpperCase(),
           User: this.user.userDetails,
-          Date: Date.now().toString(),
+          Date: Date.now().toJSON(),
           IcecreamId: item.Id,
           Status: 'New',
           DriverId: null,
