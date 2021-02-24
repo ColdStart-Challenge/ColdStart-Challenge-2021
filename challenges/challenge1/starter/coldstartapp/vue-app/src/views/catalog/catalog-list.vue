@@ -24,6 +24,7 @@ export default {
     return {
       isAuthenticated: false,
       user: {},
+      guid: VueUUID.v1(),
     };
   },
   mounted() {
@@ -34,9 +35,8 @@ export default {
       console.log(item);
       if (item.Id) {
         console.log('Valid submit event payload!');
-        const guid = this.getGUID();
         const ret = {
-          Id: guid,
+          Id: VueUUID.v1(),
           User: this.user.userDetails,
           Date: Date.now().toString(),
           IcecreamId: item.Id,
