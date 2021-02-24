@@ -24,11 +24,12 @@ export default {
     return {
       isAuthenticated: false,
       user: {},
-      guid: VueUUID.v1(),
+      guid: '',
     };
   },
   mounted() {
     this.getIsAuthenticated();
+    this.getGUID();
   },
   methods: {
     clicked: (item) => {
@@ -36,7 +37,7 @@ export default {
       if (item.Id) {
         console.log('Valid submit event payload!');
         const ret = {
-          Id: VueUUID.v1(),
+          Id: this.guid,
           User: this.user.userDetails,
           Date: Date.now().toString(),
           IcecreamId: item.Id,
@@ -62,7 +63,10 @@ export default {
       });
     },
     getGUID() {
-      return VueUUID.v1();
+      this.guid = VueUUID.v1();
+      console.log(this.guid);
+      this.guid = this.$uuid.v1();
+      console.log(this.guid);
     },
   },
 };
