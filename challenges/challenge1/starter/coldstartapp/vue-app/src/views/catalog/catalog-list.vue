@@ -2,7 +2,7 @@
 import CardContent from '@/components/card-content.vue';
 import ButtonFooter from '@/components/button-footer.vue';
 import getUserInfo from '@/assets/js/userInfo';
-import VueUUID from 'vue-uuid';
+// import VueUUID from 'vue-uuid';
 
 export default {
   name: 'CatalogList',
@@ -63,9 +63,13 @@ export default {
       });
     },
     getGUID() {
-      this.guid = VueUUID.v1();
-      console.log(this.guid);
-      this.guid = this.$uuid.v1();
+      let dt = new Date().getTime();
+      const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+        const r = ((dt + Math.random() * 16) % 16) | 0; // eslint-disable-line no-bitwise
+        dt = Math.floor(dt / 16);
+        return (c === 'x' ? r : ((r & 0x3) | 0x8)).toString(16); // eslint-disable-line no-bitwise
+      });
+      this.guid = uuid;
       console.log(this.guid);
     },
   },
