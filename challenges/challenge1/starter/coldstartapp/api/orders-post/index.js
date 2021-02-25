@@ -17,8 +17,10 @@ module.exports = async function (context, req) {
     console.log(header.substr(2));
     const encoded = Buffer.from(header.substr(2), "base64");
     console.log("After Buffer");
+    console.log(encoded);
     const decoded = encoded.toString("ascii");
     console.log("After Encode");
+    console.log(decoded);
     user = JSON.parse(decoded);
     console.log("After Parse");
     console.log(user);
