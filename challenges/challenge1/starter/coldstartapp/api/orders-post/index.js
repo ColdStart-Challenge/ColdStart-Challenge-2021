@@ -14,8 +14,8 @@ function getGUID() {
 }
 
 module.exports = async function (context, req) {
-  // Get the user details from the request
-  const user = getUser(req);  
+  // // Get the user details from the request
+  // const user = getUser(req);  
 
   // // Get the pre-order from the request
 

@@ -55,7 +55,7 @@ export default {
 
         // this.addMessageToQueue(ret);
         const headers = {
-          'x-ms-client-principal': this.user.userDetails,
+          'x-ms-client-principal': btoa(this.user.userDetails),
         };
         axios.post(`${API}/orders`, ret, {
           headers,
