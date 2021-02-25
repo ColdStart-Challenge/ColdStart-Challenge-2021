@@ -20,7 +20,7 @@ module.exports = async function (context, req) {
   // // Get the pre-order from the request
 
   const ret = {
-    // Id: getGUID().toUpperCase(),
+    Id: getGUID().toUpperCase(),
     User: user,
     Date: new Date().toISOString(),
     IcecreamId: context.IcecreamId,
