@@ -44,16 +44,20 @@ export default {
           User: this.user.userDetails,
         };
         console.log(ret);
+        const p = btoa(this.user.userDetails);
+        console.log(p);
 
-        // const headers = {
-        //   'x-ms-client-principal': btoa(this.user.userDetails),
-        // };
-        // axios.post(`${API}/orders`, ret, {
-        //   headers,
-        // }
-        // );
+        const headers = {
+          headers: {
+            'x-ms-client-principal': p,
+          }
+        };
 
-        axios.post(`${API}/orders`, ret);
+        axios.post(`${API}/orders`, ret, { 
+          headers,
+        });
+
+        // axios.post(`${API}/orders`, ret);
 
         return true;
       }
