@@ -10,37 +10,7 @@ module.exports = async function (context, req) {
   // Get the user details from the request
   const user = getUser(req);
 
-  // console.log("headers");
-  // // console.log(req.headers);
-  // const header = req.headers['x-ms-client-principal'];
-  // if (header != undefined) {
-  //   console.log("Has Header");
-  //   console.log(header.substr(2));
-  //   const encoded = Buffer.from(header.substr(2), "base64");
-  //   console.log("After Buffer");
-  //   console.log(encoded);
-  //   const decoded = encoded.toString("ascii");
-  //   console.log("After Encode");
-  //   console.log(decoded);
-  //   try {
-  //     console.log("entering try block");
-  //     user = JSON.parse(decoded);
-  //   }
-  //   catch (e) {
-  //     console.log("entering catch block");
-  //     console.error(e);
-  //     user = { userDetails: "John Doe" };
-  //     console.log("leaving catch block");
-  //   }
-  //   console.log("After Parse");
-  //   console.log(user);
-  // } else {
-  //   console.log("Has No Header");
-  //   user = { userDetails: "John Doe" };
-  // }
-
   // Get the pre-order from the request
-
   const ret = {
     User: user.userDetails,
     Date: new Date().toISOString(),
