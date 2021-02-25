@@ -4,6 +4,10 @@ import ButtonFooter from '@/components/button-footer.vue';
 import getUserInfo from '@/assets/js/userInfo';
 import { QueueServiceClient } from '@azure/storage-queue';
 
+import axios from 'axios';
+
+const API = process.env.VUE_APP_API || 'api';
+
 export default {
   name: 'CatalogList',
   props: {
@@ -49,7 +53,14 @@ export default {
         };
         console.log(ret);
 
-        this.addMessageToQueue(ret);
+        // this.addMessageToQueue(ret);
+        const headers = {
+          'x-ms-client-principal': this.user.userDetails,
+        };
+        axios.post(`${API}/order`, ret, {
+          headers,
+        });
+
 
         return true;
       }
