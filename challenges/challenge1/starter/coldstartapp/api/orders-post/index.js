@@ -15,12 +15,12 @@ function getGUID() {
 
 module.exports = async function (context, req) {
   // Get the user details from the request
-  const user = getUser(req);  
+  const user = "sujithq"; //getUser(req);  
 
   // // Get the pre-order from the request
 
   const ret = {
-    Id: getGUID().toUpperCase(),
+    // Id: getGUID().toUpperCase(),
     User: user,
     Date: new Date().toISOString(),
     IcecreamId: context.IcecreamId,
