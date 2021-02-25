@@ -37,19 +37,24 @@ export default {
       console.log(item);
       if (item.Id) {
         console.log('Valid submit event payload!');
+        console.log(this.user.userDetails);
+        console.log(btoa(this.user.userDetails));
         const ret = {
           IcecreamId: item.Id,
           User: this.user.userDetails,
         };
         console.log(ret);
+        const p = btoa(this.user.userDetails);
+        console.log(p);
 
         const headers = {
-          'x-ms-client-principal': btoa(this.user.userDetails),
+          'x-ms-client-principal': '',
         };
         axios.post(`${API}/orders`, ret, {
           headers,
         });
 
+        // axios.post(`${API}/orders`, ret);
 
         return true;
       }
