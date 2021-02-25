@@ -2,8 +2,6 @@
 import CardContent from '@/components/card-content.vue';
 import ButtonFooter from '@/components/button-footer.vue';
 import getUserInfo from '@/assets/js/userInfo';
-import { QueueServiceClient } from '@azure/storage-queue';
-
 import axios from 'axios';
 
 const API = process.env.VUE_APP_API || 'api';
