@@ -4,15 +4,15 @@ const { QueueServiceClient } = require('@azure/storage-queue')
 
 module.exports = async function (context, req) {
 
-  console.log(req);
+  context.log('Node.js HTTP trigger function processed a request. RequestUri=%s', req.originalUrl);
+  context.log('Request Headers = ', JSON.stringify(req.headers));
 
   // Get the user details from the request
-  // const user = getUser(req);
+  const user = getUser(req);
 
   // Get the pre-order from the request
-
   const ret = {
-    User: context.User,
+    User: user.userDetails,
     Date: new Date().toISOString(),
     IcecreamId: context.IcecreamId,
     Status: 'New',
