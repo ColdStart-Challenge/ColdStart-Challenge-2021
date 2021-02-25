@@ -50,8 +50,8 @@ module.exports = async function (context, req) {
   // to create and manipulate a queue
   const queueClient = queueServiceClient.getQueueClient(queueName);
 
-  // // Create the queue
-  // // await queueClient.create();
+  // Create the queue
+  await queueClient.create();
 
   // const retStr = JSON.stringify(ret);
 
