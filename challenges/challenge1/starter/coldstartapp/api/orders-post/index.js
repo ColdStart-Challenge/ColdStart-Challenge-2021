@@ -4,6 +4,9 @@ const { QueueServiceClient } = require('@azure/storage-queue')
 
 module.exports = async function (context, req) {
 
+  context.log('Node.js HTTP trigger function processed a request. RequestUri=%s', req.originalUrl);
+  context.log('Request Headers = ', JSON.stringify(req.headers));
+
   // Get the user details from the request
   const user = "";
   console.log("headers");
