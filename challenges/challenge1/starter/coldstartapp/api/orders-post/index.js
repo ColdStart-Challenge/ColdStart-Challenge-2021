@@ -51,14 +51,14 @@ module.exports = async function (context, req) {
   const queueClient = queueServiceClient.getQueueClient(queueName);
 
   // Create the queue
-  await queueClient.create();
+  // await queueClient.create();
 
-  // const retStr = JSON.stringify(ret);
+  const retStr = JSON.stringify(ret);
 
-  // console.log('Adding message to the queue: ', retStr);
+  console.log('Adding message to the queue: ', retStr);
 
-  // // Add a message to the queue
-  // await queueClient.sendMessage(retStr);
+  // Add a message to the queue
+  await queueClient.sendMessage(retStr);
 
   context.res.status(201);
 };
