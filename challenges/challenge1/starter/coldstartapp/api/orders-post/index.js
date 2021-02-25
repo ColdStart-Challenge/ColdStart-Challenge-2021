@@ -46,9 +46,9 @@ module.exports = async function (context, req) {
   // to create a QueueClient and to list all the queues
   const queueServiceClient = QueueServiceClient.fromConnectionString(connectionString);
 
-  // // Get a QueueClient which will be used
-  // // to create and manipulate a queue
-  // const queueClient = queueServiceClient.getQueueClient(queueName);
+  // Get a QueueClient which will be used
+  // to create and manipulate a queue
+  const queueClient = queueServiceClient.getQueueClient(queueName);
 
   // // Create the queue
   // // await queueClient.create();
