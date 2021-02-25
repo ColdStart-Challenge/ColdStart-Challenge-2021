@@ -2,17 +2,28 @@ const { getUser } = require('../shared/user-utils');
 
 const { QueueServiceClient } = require('@azure/storage-queue')
 
+function getGUID() {
+  let dt = new Date().getTime();
+  const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = ((dt + Math.random() * 16) % 16) | 0; // eslint-disable-line no-bitwise
+    dt = Math.floor(dt / 16);
+    return (c === 'x' ? r : ((r & 0x3) | 0x8)).toString(16); // eslint-disable-line no-bitwise
+  });
+  this.guid = uuid;
+  console.log(this.guid);
+}
+
 module.exports = async function (context, req) {
   // Get the user details from the request
-  const user = getUser(req);
+  const user = getUser(req);  
 
   // Get the pre-order from the request
 
   const ret = {
-    // Id: this.guid.toUpperCase(),
+    Id: getGUID().toUpperCase(),
     User: user,
     Date: new Date().toISOString(),
-    // IcecreamId: item.Id,
+    IcecreamId: context.Id,
     Status: 'New',
     DriverId: null,
     FullAddress: '1 Microsoft Way, Redmond, WA 98052, USA',
