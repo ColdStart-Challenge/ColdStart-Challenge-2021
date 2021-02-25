@@ -39,7 +39,7 @@ export default {
         console.log('Valid submit event payload!');
         const ret = {
           IcecreamId: item.Id,
-          User: user.userDetails,
+          User: this.user.userDetails,
         };
         console.log(ret);
 
