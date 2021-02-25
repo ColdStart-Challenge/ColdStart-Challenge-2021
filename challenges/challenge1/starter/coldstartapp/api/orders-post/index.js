@@ -6,7 +6,8 @@ module.exports = async function (context, req) {
 
   // Get the user details from the request
   const user = "";
-
+  console.log("headers");
+  console.log(req.headers);
   const header = req.headers["x-ms-client-principal"];
   if (header != undefined) {
     console.log("Has Header");
