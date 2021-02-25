@@ -9,6 +9,18 @@ module.exports = async function (context, req) {
   // Get the user details from the request
   // const user = getUser(req);
 
+    const header = req.headers["x-ms-client-principal"];
+    if (header != undefined) {
+      console.log("Has Header");
+    //     const encoded = Buffer.from(header, "base64");
+    //     const decoded = encoded.toString("ascii");
+
+    //     return JSON.parse(decoded);
+    } else {
+      console.log("Has No Header");
+    //     return { userDetails: "John Doe" };
+    }
+
   // Get the pre-order from the request
 
   const ret = {
