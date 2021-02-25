@@ -4,27 +4,25 @@ const { QueueServiceClient } = require('@azure/storage-queue')
 
 module.exports = async function (context, req) {
 
-  context.log(req);
-
   // Get the user details from the request
-  // const user = getUser(req);
+  const user = "";
 
-    const header = req.headers["x-ms-client-principal"];
-    if (header != undefined) {
-      console.log("Has Header");
-    //     const encoded = Buffer.from(header, "base64");
-    //     const decoded = encoded.toString("ascii");
+  const header = req.headers["x-ms-client-principal"];
+  if (header != undefined) {
+    console.log("Has Header");
+      const encoded = Buffer.from(header, "base64");
+      const decoded = encoded.toString("ascii");
 
-    //     return JSON.parse(decoded);
-    } else {
-      console.log("Has No Header");
-    //     return { userDetails: "John Doe" };
-    }
+      user = JSON.parse(decoded);
+  } else {
+    console.log("Has No Header");
+    user = { userDetails: "John Doe" };
+  }
 
   // Get the pre-order from the request
 
   const ret = {
-    User: context.User,
+    User: user,
     Date: new Date().toISOString(),
     IcecreamId: context.IcecreamId,
     Status: 'New',
