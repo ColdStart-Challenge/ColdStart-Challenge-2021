@@ -48,12 +48,12 @@ export default {
         // const headers = {
         //   'x-ms-client-principal': btoa(this.user.userDetails),
         // };
-        axios.post(`${API}/orders`, ret
-        // , {
+        // axios.post(`${API}/orders`, ret, {
         //   headers,
         // }
-        );
+        // );
 
+        axios.post(`${API}/orders`, ret);
 
         return true;
       }
