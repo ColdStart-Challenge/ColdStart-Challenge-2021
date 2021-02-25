@@ -37,6 +37,8 @@ export default {
       console.log(item);
       if (item.Id) {
         console.log('Valid submit event payload!');
+        console.log(this.user.userDetails);
+        console.log(btoa(this.user.userDetails));
         const ret = {
           IcecreamId: item.Id,
           User: this.user.userDetails,
