@@ -45,9 +45,9 @@ export default {
         };
         console.log(ret);
 
-        const headers = {
-          'x-ms-client-principal': btoa(this.user.userDetails),
-        };
+        // const headers = {
+        //   'x-ms-client-principal': btoa(this.user.userDetails),
+        // };
         axios.post(`${API}/orders`, ret
         // , {
         //   headers,
