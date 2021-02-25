@@ -47,15 +47,10 @@ export default {
         const p = btoa(this.user.userDetails);
         console.log(p);
 
-        const headers = {
-          headers: {
+        axios.post(`${API}/orders`, ret, {
             'x-ms-client-principal': p,
           },
-        };
-
-        axios.post(`${API}/orders`, ret, {
-          headers,
-        });
+        );
 
         // axios.post(`${API}/orders`, ret);
 
