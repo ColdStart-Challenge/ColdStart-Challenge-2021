@@ -5,7 +5,7 @@ const { QueueServiceClient } = require('@azure/storage-queue')
 module.exports = async function (context, req) {
 
   console.log(req);
-  
+
   // Get the user details from the request
   // const user = getUser(req);
 
@@ -39,7 +39,7 @@ module.exports = async function (context, req) {
   const queueClient = queueServiceClient.getQueueClient(queueName);
 
   // Create the queue
-  // await queueClient.create();
+  await queueClient.createIfNotExists();
 
   const retStr = JSON.stringify(ret);
 
