@@ -4,13 +4,12 @@ const { QueueServiceClient } = require('@azure/storage-queue')
 
 module.exports = async function (context, req) {
   // Get the user details from the request
-  const user = getUser(req);  
+  // const user = getUser(req);
 
-  // // Get the pre-order from the request
+  // Get the pre-order from the request
 
   const ret = {
-    // Id: getGUID().toUpperCase(),
-    User: user,
+    User: context.User,
     Date: new Date().toISOString(),
     IcecreamId: context.IcecreamId,
     Status: 'New',
@@ -19,9 +18,6 @@ module.exports = async function (context, req) {
     LastPosition: null,
   };
   
-  // // TODO: add the pre-order JSON document in a queue
-
-
   // Retrieve the connection from an environment
   // variable called AZURE_STORAGE_CONNECTION_STRING
   const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING;
