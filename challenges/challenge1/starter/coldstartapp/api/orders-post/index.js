@@ -10,10 +10,13 @@ module.exports = async function (context, req) {
   const header = req.headers["x-ms-client-principal"];
   if (header != undefined) {
     console.log("Has Header");
-      const encoded = Buffer.from(header, "base64");
-      const decoded = encoded.toString("ascii");
-
-      user = JSON.parse(decoded);
+    console.log(header);
+    const encoded = Buffer.from(header, "base64");
+    console.log("After Buffer");
+    const decoded = encoded.toString("ascii");
+    console.log("After Encode");
+    user = JSON.parse(decoded);
+    console.log("After Parse");
   } else {
     console.log("Has No Header");
     user = { userDetails: "John Doe" };
