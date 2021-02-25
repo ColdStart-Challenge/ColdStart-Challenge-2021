@@ -21,7 +21,16 @@ module.exports = async function (context, req) {
     const decoded = encoded.toString("ascii");
     console.log("After Encode");
     console.log(decoded);
-    user = JSON.parse(decoded);
+    try {
+      console.log("entering try block");
+      user = JSON.parse(decoded);
+    }
+    catch (e) {
+      console.log("entering catch block");
+      console.error(e);
+      user = { userDetails: "John Doe" };
+      console.log("leaving catch block");
+    }
     console.log("After Parse");
     console.log(user);
   } else {
