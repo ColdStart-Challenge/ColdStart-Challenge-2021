@@ -8,19 +8,20 @@ module.exports = async function (context, req) {
   context.log('Request Headers = ', JSON.stringify(req.headers));
 
   // Get the user details from the request
-  const user = "";
+  const user = {};
   console.log("headers");
   // console.log(req.headers);
-  const header = req.headers['x-ms-client-principal'].substr(2);
+  const header = req.headers['x-ms-client-principal'];
   if (header != undefined) {
     console.log("Has Header");
-    console.log(header);
-    const encoded = Buffer.from(header, "base64");
+    console.log(header.substr(2));
+    const encoded = Buffer.from(header.substr(2), "base64");
     console.log("After Buffer");
     const decoded = encoded.toString("ascii");
     console.log("After Encode");
     user = JSON.parse(decoded);
     console.log("After Parse");
+    console.log(user);
   } else {
     console.log("Has No Header");
     user = { userDetails: "John Doe" };
