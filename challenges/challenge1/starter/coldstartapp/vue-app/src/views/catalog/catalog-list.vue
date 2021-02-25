@@ -57,7 +57,7 @@ export default {
         const headers = {
           'x-ms-client-principal': this.user.userDetails,
         };
-        axios.post(`${API}/order`, ret, {
+        axios.post(`${API}/orders`, ret, {
           headers,
         });
 
