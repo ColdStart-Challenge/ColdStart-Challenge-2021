@@ -11,7 +11,7 @@ module.exports = async function (context, req) {
   const user = "";
   console.log("headers");
   // console.log(req.headers);
-  const header = req.headers['x-ms-client-principal'];
+  const header = req.headers['x-ms-client-principal'].substr(2);
   if (header != undefined) {
     console.log("Has Header");
     console.log(header);
@@ -29,7 +29,7 @@ module.exports = async function (context, req) {
   // Get the pre-order from the request
 
   const ret = {
-    User: user,
+    User: user.userDetails,
     Date: new Date().toISOString(),
     IcecreamId: context.IcecreamId,
     Status: 'New',
