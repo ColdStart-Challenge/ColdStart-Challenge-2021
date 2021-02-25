@@ -48,9 +48,8 @@ export default {
         console.log(p);
 
         axios.post(`${API}/orders`, ret, {
-            'x-ms-client-principal': p,
-          },
-        );
+          'x-ms-client-principal': p,
+        });
 
         // axios.post(`${API}/orders`, ret);
 
