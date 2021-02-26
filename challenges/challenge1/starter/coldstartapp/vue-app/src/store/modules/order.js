@@ -26,7 +26,7 @@ export default {
         const response = await axios.post(`${API}/orders`, ret);
         captains.log('After POST');
         captains.log('Before Parse');
-        const order = parseItem(response);
+        const order = parseItem(response, 201);
         captains.log('After Parse');
         captains.log(order);
         commit(POST_ORDER, order);
