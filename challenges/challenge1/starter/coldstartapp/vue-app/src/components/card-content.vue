@@ -42,9 +42,9 @@ export default {
   methods: {
     ...mapActions('order', ['postOrderAction']),
     async clicked(item) {
-      if (item.Id) {
+      if (item) {
         const ret = {
-          IcecreamId: item.Id,
+          IcecreamId: item,
           User: this.user.userDetails,
         };
         try {
@@ -82,7 +82,7 @@ export default {
       </div>
       <p class="description">{{ description }}</p>
       <ButtonFooter @clicked="clicked"
-            :item="icecream"
+            :item="id"
             label="Add To Cart"
             class="primary"
             v-if="isAuthenticated === true"

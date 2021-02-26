@@ -33,6 +33,7 @@ export default {
       >
         <div class="card">
           <CardContent
+            :id="icecream.Id"
             :name="icecream.Name"
             :description="icecream.Description"
             :imageurl="icecream.ImageUrl"
