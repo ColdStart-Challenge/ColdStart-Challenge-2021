@@ -3,8 +3,8 @@ export default {
   name: 'ButtonFooter',
   props: {
     item: {
-      type: Object,
-      default() {},
+      type: String,
+      default: () => '',
     },
     className: {
       type: String,
@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     handleClick() {
-      console.log(this.item);
       this.$emit('clicked', this.item);
     },
 
