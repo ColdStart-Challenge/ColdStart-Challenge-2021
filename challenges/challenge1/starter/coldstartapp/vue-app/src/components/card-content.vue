@@ -40,7 +40,6 @@ export default {
   methods: {
     ...mapActions('order', ['postOrderAction']),
     async clicked(item) {
-      console.log(item);
       if (item) {
         const ret = {
           IcecreamId: item,

@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     handleClick() {
-      console.log(this.item);
       this.$emit('clicked', this.item);
     },
 
