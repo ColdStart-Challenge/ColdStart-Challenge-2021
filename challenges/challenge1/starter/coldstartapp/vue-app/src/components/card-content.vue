@@ -29,8 +29,6 @@ export default {
   data() {
     return {
       isAuthenticated: false,
-      user: {},
-      guid: '',
     };
   },
   mounted() {
@@ -46,7 +44,6 @@ export default {
       if (item) {
         const ret = {
           IcecreamId: item,
-          User: this.user.userDetails,
         };
         try {
           await this.postOrderAction(ret);
@@ -61,10 +58,9 @@ export default {
     getIsAuthenticated() {
       getUserInfo().then((r) => {
         this.isAuthenticated = (r !== null);
-        this.user = r;
       },
       () => {
-        this.user = {};
+        this.isAuthenticated = false;
       });
     },
   },
