@@ -47,9 +47,14 @@ export default {
           User: this.user.userDetails,
         };
         console.log(ret);
-
-        this.postOrderAction(ret);
-        return true;
+        try {
+          const o = this.postOrderAction(ret);
+          console.log(o);
+          return true;
+        } catch (error) {
+          console.log(error);
+          return false
+        }
       }
       console.warn('Invalid submit event payload!');
       return false;
