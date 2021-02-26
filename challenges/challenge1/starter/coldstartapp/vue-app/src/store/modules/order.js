@@ -39,6 +39,6 @@ export default {
       },
     },
     getters: {
-      catalog: (state) => state.order,
+      order: (state) => state.order,
     },
   };

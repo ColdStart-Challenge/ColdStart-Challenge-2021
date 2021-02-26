@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     ...mapActions('order', ['postOrderAction']),
-    clicked(item) {
+    async clicked(item) {
       console.log(item);
       if (item.Id) {
         console.log('Valid submit event payload!');
@@ -48,7 +48,7 @@ export default {
         };
         console.log(ret);
         try {
-          const o = this.postOrderAction(ret);
+          const o = await this.postOrderAction(ret);
           console.log(o);
           return true;
         } catch (error) {
