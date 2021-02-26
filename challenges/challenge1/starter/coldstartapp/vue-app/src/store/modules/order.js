@@ -18,14 +18,23 @@ export default {
     },
     actions: {
       async postOrderAction({ commit }, ret) {
+        console.log("Enter postOrderAction");
+        console.log(ret);
         try {
-          const response = await axios.post(`${API}/orders`, ret);
-          const order = parseItem(response);
-          commit(POST_ORDER, order);
-          return order;
+            console.log("Enter postOrderAction");
+            console.log("Before POST");
+            const response = await axios.post(`${API}/orders`, ret);
+            console.log("After POST");
+            console.log("Before Parse");
+            const order = parseItem(response);
+            console.log("After Parse");
+            console.log(order);
+            commit(POST_ORDER, order);
+            console.log("Leave postOrderAction");
+            return order;
         } catch (error) {
-          captains.error(error);
-          throw new Error(error);
+            captains.error(error);
+            throw new Error(error);
         }
       },
     },
