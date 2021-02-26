@@ -1,11 +1,5 @@
 <script>
-import { mapActions, mapGetters } from 'vuex';
 import CardContent from '@/components/card-content.vue';
-import ButtonFooter from '@/components/button-footer.vue';
-import getUserInfo from '@/assets/js/userInfo';
-
-// import axios from 'axios';
-// const API = process.env.VUE_APP_API || 'api';
 
 export default {
   name: 'CatalogList',
@@ -21,56 +15,6 @@ export default {
   },
   components: {
     CardContent,
-    ButtonFooter,
-  },
-  data() {
-    return {
-      isAuthenticated: false,
-      user: {},
-      guid: '',
-    };
-  },
-  mounted() {
-    this.getIsAuthenticated();
-  },
-  computed: {
-    ...mapGetters('order', { order: 'order' }),
-  },
-  methods: {
-    ...mapActions('order', ['postOrderAction']),
-    async clicked(item) {
-      console.log(item);
-      if (item.Id) {
-        console.log('Valid submit event payload!');
-        console.log(this.user.userDetails);
-        console.log(btoa(this.user.userDetails));
-        const ret = {
-          IcecreamId: item.Id,
-          User: this.user.userDetails,
-        };
-        console.log(ret);
-        try {
-          const o = await this.postOrderAction(ret);
-          console.log(o);
-          return true;
-        } catch (error) {
-          console.log(error);
-          return false;
-        }
-      }
-      console.warn('Invalid submit event payload!');
-      return false;
-    },
-    getIsAuthenticated() {
-      getUserInfo().then((r) => {
-        console.log(r);
-        this.isAuthenticated = (r !== null);
-        this.user = r;
-      },
-      () => {
-        this.user = {};
-      });
-    },
   },
 };
 </script>
@@ -93,12 +37,7 @@ export default {
             :description="icecream.Description"
             :imageurl="icecream.ImageUrl"
           />
-          <ButtonFooter @clicked="clicked"
-            :item="icecream"
-            label="Add To Cart"
-            class="primary"
-            v-if="isAuthenticated === true"
-          />
+
         </div>
       </div>
     </div>
