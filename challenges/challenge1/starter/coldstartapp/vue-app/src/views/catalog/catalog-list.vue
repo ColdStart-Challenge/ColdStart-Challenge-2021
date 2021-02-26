@@ -2,11 +2,11 @@
 import CardContent from '@/components/card-content.vue';
 import ButtonFooter from '@/components/button-footer.vue';
 import getUserInfo from '@/assets/js/userInfo';
-import axios from 'axios';
+
+// import axios from 'axios';
+// const API = process.env.VUE_APP_API || 'api';
 
 import { mapActions } from 'vuex';
-
-const API = process.env.VUE_APP_API || 'api';
 
 export default {
   name: 'CatalogList',
@@ -47,18 +47,8 @@ export default {
           User: this.user.userDetails,
         };
         console.log(ret);
-        const p = btoa(this.user.userDetails);
-        console.log(p);
 
-        const headers = {
-          'x-ms-client-principal': '',
-        };
-        axios.post(`${API}/orders`, ret, {
-          headers,
-        });
-
-        // axios.post(`${API}/orders`, ret);
-
+        this.postOrderAction(ret);
         return true;
       }
       console.warn('Invalid submit event payload!');
