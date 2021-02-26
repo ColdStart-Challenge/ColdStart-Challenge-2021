@@ -48,7 +48,7 @@ export default {
           User: this.user.userDetails,
         };
         try {
-          const o = await this.postOrderAction(ret);
+          await this.postOrderAction(ret);
           return true;
         } catch (error) {
           console.error(error);
