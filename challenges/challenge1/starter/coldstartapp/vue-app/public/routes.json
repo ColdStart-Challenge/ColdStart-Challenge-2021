@@ -4,6 +4,9 @@
       "route": "/api/catalog"
     },
     {
+      "route": "/api/orders"
+    },
+    {
       "route": "/login",
       "serve": "/.auth/login/github"
     },
