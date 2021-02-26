@@ -4,6 +4,8 @@ import ButtonFooter from '@/components/button-footer.vue';
 import getUserInfo from '@/assets/js/userInfo';
 import axios from 'axios';
 
+import { mapActions } from 'vuex';
+
 const API = process.env.VUE_APP_API || 'api';
 
 export default {
@@ -33,6 +35,7 @@ export default {
     this.getIsAuthenticated();
   },
   methods: {
+    ...mapActions('orders', ['postOrderAction']),
     clicked(item) {
       console.log(item);
       if (item.Id) {
