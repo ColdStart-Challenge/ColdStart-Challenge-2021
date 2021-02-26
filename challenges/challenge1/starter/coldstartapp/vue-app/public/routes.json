@@ -7,8 +7,12 @@
       "route": "/api/orders"
     },
     {
-      "route": "/login",
+      "route": "/logingithub",
       "serve": "/.auth/login/github"
+    },
+    {
+      "route": "/loginfacebook",
+      "serve": "/.auth/login/facebook"
     },
     {
       "route": "/logout",
