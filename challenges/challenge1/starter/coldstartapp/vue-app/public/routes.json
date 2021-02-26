@@ -4,8 +4,15 @@
       "route": "/api/catalog"
     },
     {
-      "route": "/login",
+      "route": "/api/orders"
+    },
+    {
+      "route": "/logingithub",
       "serve": "/.auth/login/github"
+    },
+    {
+      "route": "/loginfacebook",
+      "serve": "/.auth/login/facebook"
     },
     {
       "route": "/logout",

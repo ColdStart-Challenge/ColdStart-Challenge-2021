@@ -1,10 +1,11 @@
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import CardContent from '@/components/card-content.vue';
 import ButtonFooter from '@/components/button-footer.vue';
 import getUserInfo from '@/assets/js/userInfo';
-import axios from 'axios';
 
-const API = process.env.VUE_APP_API || 'api';
+// import axios from 'axios';
+// const API = process.env.VUE_APP_API || 'api';
 
 export default {
   name: 'CatalogList',
@@ -32,8 +33,12 @@ export default {
   mounted() {
     this.getIsAuthenticated();
   },
+  computed: {
+    ...mapGetters('order', { order: 'order' }),
+  },
   methods: {
-    clicked(item) {
+    ...mapActions('order', ['postOrderAction']),
+    async clicked(item) {
       console.log(item);
       if (item.Id) {
         console.log('Valid submit event payload!');
@@ -44,19 +49,14 @@ export default {
           User: this.user.userDetails,
         };
         console.log(ret);
-        const p = btoa(this.user.userDetails);
-        console.log(p);
-
-        const headers = {
-          'x-ms-client-principal': '',
-        };
-        axios.post(`${API}/orders`, ret, {
-          headers,
-        });
-
-        // axios.post(`${API}/orders`, ret);
-
-        return true;
+        try {
+          const o = await this.postOrderAction(ret);
+          console.log(o);
+          return true;
+        } catch (error) {
+          console.log(error);
+          return false;
+        }
       }
       console.warn('Invalid submit event payload!');
       return false;
