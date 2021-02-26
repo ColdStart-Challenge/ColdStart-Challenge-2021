@@ -4,6 +4,9 @@ const { QueueServiceClient } = require('@azure/storage-queue')
 
 module.exports = async function (context, req) {
   try {
+    context.log(req.body);
+    context.log(req.body.IcecreamId);
+
     // Get the user details from the request
     const user = getUser(req);
     
@@ -30,12 +33,15 @@ module.exports = async function (context, req) {
     const ret = {
       User: user.userDetails,
       Date: new Date().toISOString(),
-      IcecreamId: context.IcecreamId,
+      IcecreamId: req.body.IcecreamId,
       Status: 'New',
       DriverId: null,
       FullAddress: '1 Microsoft Way, Redmond, WA 98052, USA',
       LastPosition: null,
     };
+
+    context.log(ret);
+    context.log(JSON.stringify(ret));
 
     // Add a message to the queue
     const sendMessageResponse = await queueClient.sendMessage(JSON.stringify(ret));
