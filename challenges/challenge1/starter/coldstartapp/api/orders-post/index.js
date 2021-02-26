@@ -46,7 +46,9 @@ module.exports = async function (context, req) {
   console.log('Adding message to the queue: ', retStr);
 
   // Add a message to the queue
-  await queueClient.sendMessage(retStr);
+  const sendMessageResponse = await queueClient.sendMessage(retStr);
 
   context.res.status(201);
+  ret.Id = sendMessageResponse.messageId;
+  context.res.body = ret;
 };
