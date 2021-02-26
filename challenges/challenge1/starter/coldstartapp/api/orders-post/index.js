@@ -40,6 +40,8 @@ module.exports = async function (context, req) {
       LastPosition: null,
     };
 
+    context.log(JSON.stringify(ret));
+
     // Add a message to the queue
     const sendMessageResponse = await queueClient.sendMessage(JSON.stringify(ret));
 
