@@ -42,31 +42,23 @@ export default {
   methods: {
     ...mapActions('order', ['postOrderAction']),
     async clicked(item) {
-      console.log(item);
       if (item.Id) {
-        console.log('Valid submit event payload!');
-        console.log(this.user.userDetails);
-        console.log(btoa(this.user.userDetails));
         const ret = {
           IcecreamId: item.Id,
           User: this.user.userDetails,
         };
-        console.log(ret);
         try {
           const o = await this.postOrderAction(ret);
-          console.log(o);
           return true;
         } catch (error) {
-          console.log(error);
+          console.error(error);
           return false;
         }
       }
-      console.warn('Invalid submit event payload!');
       return false;
     },
     getIsAuthenticated() {
       getUserInfo().then((r) => {
-        console.log(r);
         this.isAuthenticated = (r !== null);
         this.user = r;
       },
