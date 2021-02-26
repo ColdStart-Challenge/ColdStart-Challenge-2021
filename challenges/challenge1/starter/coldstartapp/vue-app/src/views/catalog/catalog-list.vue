@@ -1,12 +1,11 @@
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import CardContent from '@/components/card-content.vue';
 import ButtonFooter from '@/components/button-footer.vue';
 import getUserInfo from '@/assets/js/userInfo';
 
 // import axios from 'axios';
 // const API = process.env.VUE_APP_API || 'api';
-
-import { mapActions } from 'vuex';
 
 export default {
   name: 'CatalogList',
@@ -33,6 +32,9 @@ export default {
   },
   mounted() {
     this.getIsAuthenticated();
+  },
+  computed: {
+    ...mapGetters('order', { order: 'order' }),
   },
   methods: {
     ...mapActions('order', ['postOrderAction']),
