@@ -35,7 +35,7 @@ export default {
     this.getIsAuthenticated();
   },
   methods: {
-    ...mapActions('orders', ['postOrderAction']),
+    ...mapActions('order', ['postOrderAction']),
     clicked(item) {
       console.log(item);
       if (item.Id) {

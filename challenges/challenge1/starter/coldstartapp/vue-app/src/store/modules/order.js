@@ -21,16 +21,16 @@ export default {
         console.log("Enter postOrderAction");
         console.log(ret);
         try {
-            console.log("Enter postOrderAction");
-            console.log("Before POST");
+            captains.log("Enter postOrderAction");
+            captains.log("Before POST");
             const response = await axios.post(`${API}/orders`, ret);
-            console.log("After POST");
-            console.log("Before Parse");
+            captains.log("After POST");
+            captains.log("Before Parse");
             const order = parseItem(response);
-            console.log("After Parse");
-            console.log(order);
+            captains.log("After Parse");
+            captains.log(order);
             commit(POST_ORDER, order);
-            console.log("Leave postOrderAction");
+            captains.log("Leave postOrderAction");
             return order;
         } catch (error) {
             captains.error(error);
