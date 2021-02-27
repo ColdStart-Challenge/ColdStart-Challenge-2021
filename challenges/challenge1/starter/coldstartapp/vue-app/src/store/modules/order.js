@@ -1,6 +1,6 @@
 import axios from 'axios';
 import API from '../config';
-import POST_ORDER from './mutation-types';
+import { POST_ORDER } from './mutation-types';
 import { parseItem } from './action-utils';
 
 const captains = console;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import API from '../config';
 import { parseList } from './action-utils';
-import GET_CATALOG from './mutation-types';
+import { GET_CATALOG } from './mutation-types';
 
 const captains = console;
 
