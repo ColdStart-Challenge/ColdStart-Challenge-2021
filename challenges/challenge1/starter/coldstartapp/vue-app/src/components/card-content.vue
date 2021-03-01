@@ -56,7 +56,8 @@ export default {
     },
     getIsAuthenticated() {
       getUserInfo().then((r) => {
-        this.isAuthenticated = (r !== null);
+        console.log(r);
+        this.isAuthenticated = Boolean(r && r.identityProvider);
       },
       () => {
         this.isAuthenticated = false;
