@@ -8,7 +8,7 @@ export default {
     },
     className: {
       type: String,
-      default: () => '',
+      default: () => 'button',
     },
     label: {
       type: String,
