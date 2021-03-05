@@ -1,4 +1,7 @@
 <script>
+import ButtonFooter from '@/components/button-footer.vue';
+import getUserInfo from '../assets/js/userInfo';
+
 export default {
   name: 'CardContent',
   props: {
@@ -19,6 +22,18 @@ export default {
       default: () => '',
     },
   },
+  data() {
+    return {
+      errorMessage: '',
+      user: undefined,
+    };
+  },
+  components: {
+    ButtonFooter,
+  },
+  async created() {
+    this.user = await getUserInfo();
+  },
   methods: {
   },
 };
@@ -35,6 +50,9 @@ export default {
         <img v-bind:src="imageurl" />
       </div>
       <p class="description">{{ description }}</p>
+    </div>
+    <div class="buttons" v-if="user">
+      <ButtonFooter v-if="user" label="Place Order" />
     </div>
   </div>
 </template>
