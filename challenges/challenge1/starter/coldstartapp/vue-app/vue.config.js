@@ -10,5 +10,20 @@ module.exports = {
         changeOrigin: true,
       },
     },
+    before: function (app, server, compiler) {
+      app.get('/.auth/me', function (req, res) {
+        res.json({
+          'clientPrincipal': {
+            'identityProvider': 'identityProvider',
+            'userId': 'userId',
+            'userDetails': 'userDetails',
+            'userRoles': [
+              'anonymous',
+              'authenticated'
+            ]
+          }
+        });
+      });
+    },
   },
 };
