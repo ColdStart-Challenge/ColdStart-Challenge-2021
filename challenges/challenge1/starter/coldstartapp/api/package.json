@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "@azure/storage-queue": "^12.3.0",
-    "tedious": "^11.0.3"
+    "tedious": "^11.0.3",
+    "uuidv4": "^6.2.6"
   },
   "devDependencies": {}
 }
