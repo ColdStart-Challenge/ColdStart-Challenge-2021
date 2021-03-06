@@ -1,4 +1,5 @@
 <script>
+import { mapActions } from 'vuex';
 import ButtonFooter from '@/components/button-footer.vue';
 import getUserInfo from '../assets/js/userInfo';
 
@@ -6,7 +7,7 @@ export default {
   name: 'CardContent',
   props: {
     id: {
-      type: String,
+      type: Number,
       default: () => '',
     },
     name: {
@@ -24,7 +25,7 @@ export default {
   },
   data() {
     return {
-      errorMessage: '',
+      placePreOrderFeedback: '',
       user: undefined,
     };
   },
@@ -35,6 +36,16 @@ export default {
     this.user = await getUserInfo();
   },
   methods: {
+    ...mapActions('orders', ['placePreOrderAction']),
+    async placePreOrder() {
+      this.placePreOrderFeedback = undefined;
+      try {
+        await this.placePreOrderAction(this.id);
+        this.placePreOrderFeedback = 'Pre-order placed!';
+      } catch (error) {
+        this.placePreOrderFeedback = 'Pre-order could not be processed!';
+      }
+    },
   },
 };
 </script>
@@ -51,8 +62,9 @@ export default {
       </div>
       <p class="description">{{ description }}</p>
     </div>
-    <div class="buttons" v-if="user">
-      <ButtonFooter v-if="user" label="Place Order" />
+    <div class="card-footer" v-if="user">
+      <ButtonFooter label="Place Pre-order" @clicked="placePreOrder" v-if="!placePreOrderFeedback"/>
+      <div class="card-footer-item" v-if="placePreOrderFeedback">{{placePreOrderFeedback}}</div>
     </div>
   </div>
 </template>
