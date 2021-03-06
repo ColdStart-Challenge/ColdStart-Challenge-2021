@@ -57,6 +57,11 @@ export default {
                  <AuthLogout v-if="user" />
                </a>
             </div>
+            <div class="navbar-item">
+               <a class="navbar-item" v-if="user">
+                  <p> Welcome, {{user.userDetails}}! </p>
+               </a>
+            </div>
         </div>
       </div>
     </nav>
