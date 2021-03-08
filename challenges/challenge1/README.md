@@ -51,7 +51,8 @@ To successfully complete this first challenge, you will need to:
 
 ## Resources 🧰
 
-- Starter website available in this repo.
+- **[starter web application](./starter/coldstartapp)**
+- **[finished solution](./finished/coldstartapp)**
 
 ## Learning Resources 📖
 
