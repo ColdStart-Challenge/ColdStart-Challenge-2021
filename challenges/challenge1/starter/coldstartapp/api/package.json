@@ -12,10 +12,6 @@
     "@azure/ms-rest-js": "^2.2.3",
     "@azure/storage-queue": "^12.3.0",
     "browser-detect": "^0.2.28",
-    "detect-browser": "^5.2.0",
-    "moment": "^2.29.1",
-    "moment-timezone": "^0.5.33",
-    "readline-sync": "^1.4.10",
     "tedious": "^11.0.3",
     "uuid": "^8.3.2"
   },
