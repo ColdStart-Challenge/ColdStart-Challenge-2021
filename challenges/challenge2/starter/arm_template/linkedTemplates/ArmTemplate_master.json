@@ -1,0 +1,63 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "sujithq-coldstart-challenge-2021"
+        },
+        "AzureBlobStorage_sujithqcschallenge2021_properties_typeProperties_connectionString_secretName": {
+            "type": "string",
+            "defaultValue": "saconnectionstring"
+        },
+        "AzureKeyVault_sujith_csc_2021_properties_typeProperties_baseUrl": {
+            "type": "string",
+            "defaultValue": "https://sujithq-csc-2021.vault.azure.net/"
+        },
+        "SqlServer_sujithqcoldstartchallenge2021_sujithq_ColdStart_Challenge_2021_properties_typeProperties_connectionString_secretName": {
+            "type": "string",
+            "defaultValue": "sqlconnectionstring"
+        },
+        "containerUri": {
+            "type": "string",
+            "metadata": "URI to storage account containing linked ARM templates"
+        },
+        "containerSasToken": {
+            "type": "string",
+            "metadata": "Sas token to storage account containing linked ARM templates"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "sujithq-coldstart-challenge-2021_ArmTemplate_0",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-02-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "factoryName": {
+                        "value": "[parameters('factoryName')]"
+                    },
+                    "AzureKeyVault_sujith_csc_2021_properties_typeProperties_baseUrl": {
+                        "value": "[parameters('AzureKeyVault_sujith_csc_2021_properties_typeProperties_baseUrl')]"
+                    },
+                    "AzureBlobStorage_sujithqcschallenge2021_properties_typeProperties_connectionString_secretName": {
+                        "value": "[parameters('AzureBlobStorage_sujithqcschallenge2021_properties_typeProperties_connectionString_secretName')]"
+                    },
+                    "SqlServer_sujithqcoldstartchallenge2021_sujithq_ColdStart_Challenge_2021_properties_typeProperties_connectionString_secretName": {
+                        "value": "[parameters('SqlServer_sujithqcoldstartchallenge2021_sujithq_ColdStart_Challenge_2021_properties_typeProperties_connectionString_secretName')]"
+                    }
+                }
+            },
+            "dependsOn": []
+        }
+    ]
+}

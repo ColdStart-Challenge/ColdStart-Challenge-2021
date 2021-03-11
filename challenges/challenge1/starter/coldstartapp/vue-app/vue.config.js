@@ -10,18 +10,18 @@ module.exports = {
         changeOrigin: true,
       },
     },
-    before: function (app, server, compiler) {
-      app.get('/.auth/me', function (req, res) {
+    before(app) {
+      app.get('/.auth/me', (req, res) => {
         res.json({
-          'clientPrincipal': {
-            'identityProvider': 'identityProvider',
-            'userId': 'userId',
-            'userDetails': 'userDetails',
-            'userRoles': [
+          clientPrincipal: {
+            identityProvider: 'identityProvider',
+            userId: 'userId',
+            userDetails: 'userDetails',
+            userRoles: [
               'anonymous',
-              'authenticated'
-            ]
-          }
+              'authenticated',
+            ],
+          },
         });
       });
     },

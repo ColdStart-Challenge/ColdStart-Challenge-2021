@@ -2,6 +2,7 @@
 import ButtonFooter from '@/components/button-footer.vue';
 import { mapActions, mapGetters } from 'vuex';
 import getUserInfo from '@/assets/js/userInfo';
+import x from 'vue-simple-alert';
 
 export default {
   name: 'CardContent',
@@ -10,8 +11,8 @@ export default {
   },
   props: {
     id: {
-      type: String,
-      default: () => '',
+      type: Number,
+      default: () => -1,
     },
     name: {
       type: String,
@@ -24,6 +25,14 @@ export default {
     imageurl: {
       type: String,
       default: () => '',
+    },
+    eventId: {
+      type: String,
+      default: () => null,
+    },
+    reward: {
+      type: Number,
+      default: () => 0,
     },
   },
   data() {
@@ -39,29 +48,45 @@ export default {
   },
   methods: {
     ...mapActions('order', ['postOrderAction']),
+    ...mapActions('reward', ['postRewardAction']),
     async clicked(item) {
-      if (item) {
-        const ret = {
-          IcecreamId: item,
-        };
-        try {
-          await this.postOrderAction(ret);
-          return true;
-        } catch (error) {
-          console.error(error);
-          return false;
-        }
+      if (item.id) {
+        const ShippingAddress = '1 Microsoft Way, Redmond, WA 98052, USA';
+        // prompt(message, defaultText, title, type, reverseButton)
+        x.prompt('Input your shipping address', ShippingAddress).then(async (text) => {
+          const ret = {
+            IcecreamId: item.id,
+            ShippingAddress: text,
+          };
+
+          try {
+            await this.postOrderAction(ret);
+          } catch (error) {
+            console.error(error);
+            return false;
+          }
+        });
       }
-      return false;
+      try {
+        await this.postRewardAction({
+          EventId: item.eventId,
+          Reward: item.reward,
+        });
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+      return true;
     },
     getIsAuthenticated() {
-      getUserInfo().then((r) => {
-        console.log(r);
-        this.isAuthenticated = Boolean(r && r.identityProvider);
-      },
-      () => {
-        this.isAuthenticated = false;
-      });
+      getUserInfo().then(
+        (r) => {
+          this.isAuthenticated = Boolean(r && r.identityProvider);
+        },
+        () => {
+          this.isAuthenticated = false;
+        },
+      );
     },
   },
 };
@@ -78,12 +103,13 @@ export default {
         <img v-bind:src="imageurl" />
       </div>
       <p class="description">{{ description }}</p>
-      <ButtonFooter @clicked="clicked"
-            :item="this.id"
-            label="Add To Cart"
-            class="primary"
-            v-if="isAuthenticated === true"
-          />
+      <ButtonFooter
+        @clicked="clicked"
+        :item="{ id: this.id, eventId: this.eventId, reward: this.reward }"
+        label="Add To Cart"
+        class="primary"
+        v-if="isAuthenticated === true"
+      />
     </div>
   </div>
 </template>

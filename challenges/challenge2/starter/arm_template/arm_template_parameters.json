@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "value": "sujithq-coldstart-challenge-2021"
+        },
+        "AzureBlobStorage_sujithqcschallenge2021_properties_typeProperties_connectionString_secretName": {
+            "value": "saconnectionstring"
+        },
+        "AzureKeyVault_sujith_csc_2021_properties_typeProperties_baseUrl": {
+            "value": "https://sujithq-csc-2021.vault.azure.net/"
+        },
+        "SqlServer_sujithqcoldstartchallenge2021_sujithq_ColdStart_Challenge_2021_properties_typeProperties_connectionString_secretName": {
+            "value": "sqlconnectionstring"
+        }
+    }
+}

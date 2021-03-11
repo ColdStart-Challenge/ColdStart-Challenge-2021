@@ -11,6 +11,7 @@ export default {
       message: '',
       routePath: '/catalog',
       title: 'Our Ice Creams',
+      titleR: 'Recommendation',
     };
   },
   components: {
@@ -22,6 +23,7 @@ export default {
   },
   computed: {
     ...mapGetters('catalog', { catalog: 'catalog' }),
+    ...mapGetters('catalog', { recommendation: 'recommendation' }),
   },
   methods: {
     ...mapActions('catalog', ['getCatalogAction']),
@@ -39,6 +41,18 @@ export default {
 
 <template>
   <div class="content-container">
+    <ListHeader :title="titleR" @refresh="getCatalog" :routePath="routePath">
+    </ListHeader>
+    <div class="columns is-multiline is-variable">
+      <div class="column" v-if="recommendation">
+        <CatalogList
+          :icecreams="[recommendation]"
+          :errorMessage="errorMessage"
+          :reward="1"
+          :eventId="recommendation.EventId"
+        ></CatalogList>
+      </div>
+    </div>
     <ListHeader :title="title" @refresh="getCatalog" :routePath="routePath">
     </ListHeader>
     <div class="columns is-multiline is-variable">
@@ -46,6 +60,8 @@ export default {
         <CatalogList
           :icecreams="catalog"
           :errorMessage="errorMessage"
+          :reward="0"
+          :eventId="recommendation.EventId"
         ></CatalogList>
       </div>
     </div>

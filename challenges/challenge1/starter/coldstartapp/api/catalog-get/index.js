@@ -1,6 +1,6 @@
 const data = require('../shared/catalog-data');
 
-module.exports = async function (context, req) {
+module.exports = async function (context) {
   try {
     const items = await data.getCatalog();
     context.res.status(200).send(items);

@@ -3,8 +3,8 @@ export default {
   name: 'ButtonFooter',
   props: {
     item: {
-      type: String,
-      default: () => '',
+      type: Object,
+      default: () => {},
     },
     className: {
       type: String,

@@ -9,4 +9,14 @@ const getUser = (req) => {
     return { userDetails: "John Doe" };
 };
 
-module.exports = { getUser };
+
+const getAuthenticationStatus = (req) => {
+  const header = req.headers["x-ms-client-principal"];
+  if (header != undefined) {
+      return { status: "authenticated" };
+  }
+  return { status: "anonymous" };
+};
+
+
+module.exports = { getUser, getAuthenticationStatus };
