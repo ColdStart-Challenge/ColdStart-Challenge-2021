@@ -24,6 +24,9 @@ npm run serve
 
 The backend APIs are hosted using Azure Functions and can be run locally using the Azure Functions Core Tools.
 
+> Make sure to rename `local.setting.json` to `local.settings.json`. The setting**s** file is excluded to not expose any local secrets in the GitHub repository.
+
+
 ```cmd
 cd api
 npm install
