@@ -1,0 +1,64 @@
+{
+    "icecreams": [
+        {
+            "Id": 1,
+            "Name": "Color Pop",
+            "Description": "Delicious 4-color popsicle, plenty of vitamins.",
+            "ImageUrl": "https://coldstartsa.blob.core.windows.net/web/assets/Icecream1.png"
+        },
+        {
+            "Id": 2,
+            "Name": "Lemoncella",
+            "Description": "Refreshing lemon-flavoured icecream bar.",
+            "ImageUrl": "https://coldstartsa.blob.core.windows.net/web/assets/Icecream2.png"
+        },
+        {
+            "Id": 3,
+            "Name": "Pink Panther",
+            "Description": "Fruity ice cream bar with hints of strawberry and lime.",
+            "ImageUrl": "https://coldstartsa.blob.core.windows.net/web/assets/Icecream3.png"
+        },
+        {
+            "Id": 4,
+            "Name": "Choco Chique",
+            "Description": "Filled with praline and covered with the finest Belgian chocolate.",
+            "ImageUrl": "https://coldstartsa.blob.core.windows.net/web/assets/Icecream4.png"
+        },
+        {
+            "Id": 5,
+            "Name": "Blue Lagoon",
+            "Description": "Blueberry and melon ice cream bar.",
+            "ImageUrl": "https://coldstartsa.blob.core.windows.net/web/assets/Icecream5.png"
+        },
+        {
+            "Id": 6,
+            "Name": "Purple Rain",
+            "Description": "Indulging strawberry and vodka icecream bar.",
+            "ImageUrl": "https://coldstartsa.blob.core.windows.net/web/assets/Icecream6.png"
+        },
+        {
+            "Id": 7,
+            "Name": "Sorbonne",
+            "Description": "Strawberry and raspberry sorbet.",
+            "ImageUrl": "https://coldstartsa.blob.core.windows.net/web/assets/Icecream7.png"
+        },
+        {
+            "Id": 8,
+            "Name": "Sandstorm",
+            "Description": "Chocolate and vanille ice cream cookie (3).",
+            "ImageUrl": "https://coldstartsa.blob.core.windows.net/web/assets/Icecream8.png"
+        },
+        {
+            "Id": 9,
+            "Name": "Maxi jazz",
+            "Description": "Dame Blanche flavoured ice cream cake (6p).",
+            "ImageUrl": "https://coldstartsa.blob.core.windows.net/web/assets/Icecream9.png"
+        },
+        {
+            "Id": 10,
+            "Name": "Triplets",
+            "Description": "Surprise yourself with a random selection of 3 different flavors.",
+            "ImageUrl": "https://coldstartsa.blob.core.windows.net/web/assets/Icecream10.png"
+        }
+    ]
+}
