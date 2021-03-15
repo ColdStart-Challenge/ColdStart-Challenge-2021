@@ -1,0 +1,34 @@
+{
+  "routes": [
+    {
+      "route": "/api/catalog"
+    },
+    {
+      "route": "/api/orders"
+    },
+    {
+      "route": "/logingithub",
+      "serve": "/.auth/login/github"
+    },
+    {
+      "route": "/loginfacebook",
+      "serve": "/.auth/login/facebook"
+    },
+    {
+      "route": "/logout",
+      "serve": "/.auth/logout"
+    },
+    {
+      "route": "/*",
+      "serve": "/index.html",
+      "statusCode": 200
+    }
+  ],
+  "platformErrorOverrides": [
+    {
+      "errorType": "NotFound",
+      "serve": "/404.html"
+    }
+  ]
+  
+}
