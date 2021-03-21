@@ -30,6 +30,10 @@ export default {
   computed: {
     ...mapGetters('catalog', { catalog: 'catalog' }),
     ...mapGetters('catalog', { recommended: 'recommended' }),
+    recommendation() {
+      const id = Number.parseInt(this.recommended.Id, 10);
+      return this.catalog.filter((x) => x.Id === id)[0];
+    },
   },
   methods: {
     ...mapActions('icecreams', ['buyIcecreamAction']),
@@ -82,7 +86,7 @@ export default {
     <div class="columns is-multiline is-variable">
       <div class="column" v-if="recommended">
         <CatalogList
-          :icecreams="[recommended]"
+          :icecreams="recommendation"
           :errorMessage="errorMessage"
           @bought="askToBuy($event)"
         ></CatalogList>
