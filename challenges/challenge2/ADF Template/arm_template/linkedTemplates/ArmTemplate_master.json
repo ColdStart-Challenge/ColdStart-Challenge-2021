@@ -1,0 +1,63 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory-naam",
+            "defaultValue": "ColdStart"
+        },
+        "AzureSqlColdStart_connectionString": {
+            "type": "secureString",
+            "metadata": "Beveiligde tekenreeks voor connectionString van AzureSqlColdStart"
+        },
+        "ColdStartCSV_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com/ColdStart-Challenge/ColdStart-Challenge-2021/main/challenges/challenge2/starter/data/coldstart-orders-historical.csv"
+        },
+        "JSON Catalog_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com/ColdStart-Challenge/ColdStart-Challenge-2021/main/challenges/challenge1/starter/coldstartapp/api/shared/catalog.json"
+        },
+        "containerUri": {
+            "type": "string",
+            "metadata": "URI naar opslagaccount met gekoppelde ARM-sjablonen"
+        },
+        "containerSasToken": {
+            "type": "string",
+            "metadata": "SAS-token naar opslagaccount met gekoppelde ARM-sjablonen"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "ColdStart_ArmTemplate_0",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-02-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "factoryName": {
+                        "value": "[parameters('factoryName')]"
+                    },
+                    "AzureSqlColdStart_connectionString": {
+                        "value": "[parameters('AzureSqlColdStart_connectionString')]"
+                    },
+                    "ColdStartCSV_properties_typeProperties_url": {
+                        "value": "[parameters('ColdStartCSV_properties_typeProperties_url')]"
+                    },
+                    "JSON Catalog_properties_typeProperties_url": {
+                        "value": "[parameters('JSON Catalog_properties_typeProperties_url')]"
+                    }
+                }
+            },
+            "dependsOn": []
+        }
+    ]
+}

@@ -1,0 +1,569 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory-naam",
+            "defaultValue": "ColdStart"
+        },
+        "AzureSqlColdStart_connectionString": {
+            "type": "secureString",
+            "metadata": "Beveiligde tekenreeks voor connectionString van AzureSqlColdStart"
+        },
+        "ColdStartCSV_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com/ColdStart-Challenge/ColdStart-Challenge-2021/main/challenges/challenge2/starter/data/coldstart-orders-historical.csv"
+        },
+        "JSON Catalog_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com/ColdStart-Challenge/ColdStart-Challenge-2021/main/challenges/challenge1/starter/coldstartapp/api/shared/catalog.json"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/ColdStartCSV')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "HttpServer",
+                "typeProperties": {
+                    "url": "[parameters('ColdStartCSV_properties_typeProperties_url')]",
+                    "enableServerCertificateValidation": true,
+                    "authenticationType": "Anonymous"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/AzureSqlColdStart')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "AzureSqlDatabase",
+                "typeProperties": {
+                    "connectionString": "[parameters('AzureSqlColdStart_connectionString')]"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/JSON Catalog')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "HttpServer",
+                "typeProperties": {
+                    "url": "[parameters('JSON Catalog_properties_typeProperties_url')]",
+                    "enableServerCertificateValidation": true,
+                    "authenticationType": "Anonymous"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/SourceDataset_hle')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ColdStartCSV",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "HttpServerLocation"
+                    },
+                    "columnDelimiter": ",",
+                    "rowDelimiter": "\n",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": [
+                    {
+                        "name": "User",
+                        "type": "String"
+                    },
+                    {
+                        "name": "Date",
+                        "type": "String"
+                    },
+                    {
+                        "name": "Id",
+                        "type": "String"
+                    },
+                    {
+                        "name": "IcecreamId",
+                        "type": "String"
+                    }
+                ]
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/ColdStartCSV')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/DestinationDataset_hle')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "AzureSqlColdStart",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "Orders"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/AzureSqlColdStart')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/DestinationDataset_206')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "AzureSqlColdStart",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "Id",
+                        "type": "int",
+                        "precision": 10,
+                        "scale": 0
+                    },
+                    {
+                        "name": "Name",
+                        "type": "nvarchar",
+                        "precision": 0,
+                        "scale": 0
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar",
+                        "precision": 0,
+                        "scale": 0
+                    },
+                    {
+                        "name": "ImageUrl",
+                        "type": "nvarchar",
+                        "precision": 0,
+                        "scale": 0
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "Icecreams"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/AzureSqlColdStart')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/SourceDataset_206')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "JSON Catalog",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Json",
+                "typeProperties": {
+                    "location": {
+                        "type": "HttpServerLocation"
+                    }
+                },
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "icecreams": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "Id": {
+                                        "type": "integer"
+                                    },
+                                    "Name": {
+                                        "type": "string"
+                                    },
+                                    "Description": {
+                                        "type": "string"
+                                    },
+                                    "ImageUrl": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/JSON Catalog')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/SourceDataset_dzg')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ColdStartCSV",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "HttpServerLocation"
+                    },
+                    "columnDelimiter": ",",
+                    "rowDelimiter": "\n",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": [
+                    {
+                        "name": "User",
+                        "type": "String"
+                    },
+                    {
+                        "name": "Date",
+                        "type": "String"
+                    },
+                    {
+                        "name": "Id",
+                        "type": "String"
+                    },
+                    {
+                        "name": "IcecreamId",
+                        "type": "String"
+                    }
+                ]
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/ColdStartCSV')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/DestinationDataset_dzg')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "AzureSqlColdStart",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "Id",
+                        "type": "uniqueidentifier",
+                        "precision": 0,
+                        "scale": 0
+                    },
+                    {
+                        "name": "User",
+                        "type": "nvarchar",
+                        "precision": 0,
+                        "scale": 0
+                    },
+                    {
+                        "name": "Date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "IcecreamId",
+                        "type": "int",
+                        "precision": 10,
+                        "scale": 0
+                    },
+                    {
+                        "name": "Status",
+                        "type": "nvarchar",
+                        "precision": 0,
+                        "scale": 0
+                    },
+                    {
+                        "name": "DriverId",
+                        "type": "int",
+                        "precision": 10,
+                        "scale": 0
+                    },
+                    {
+                        "name": "FullAddress",
+                        "type": "nvarchar",
+                        "precision": 0,
+                        "scale": 0
+                    },
+                    {
+                        "name": "LastPosition",
+                        "type": "nvarchar",
+                        "precision": 0,
+                        "scale": 0
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "Orders"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/AzureSqlColdStart')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/JSON_to_SQL')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Copy_206",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [
+                            {
+                                "name": "Destination",
+                                "value": "dbo.Icecreams"
+                            }
+                        ],
+                        "typeProperties": {
+                            "source": {
+                                "type": "JsonSource",
+                                "storeSettings": {
+                                    "type": "HttpReadSettings",
+                                    "requestMethod": "GET"
+                                },
+                                "formatSettings": {
+                                    "type": "JsonReadSettings"
+                                }
+                            },
+                            "sink": {
+                                "type": "AzureSqlSink"
+                            },
+                            "enableStaging": false,
+                            "translator": {
+                                "type": "TabularTranslator",
+                                "mappings": [
+                                    {
+                                        "source": {
+                                            "path": "[['Id']"
+                                        },
+                                        "sink": {
+                                            "name": "Id",
+                                            "type": "Int32"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "[['Name']"
+                                        },
+                                        "sink": {
+                                            "name": "Name",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "[['Description']"
+                                        },
+                                        "sink": {
+                                            "name": "Description",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "[['ImageUrl']"
+                                        },
+                                        "sink": {
+                                            "name": "ImageUrl",
+                                            "type": "String"
+                                        }
+                                    }
+                                ],
+                                "collectionReference": "$['icecreams']"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "SourceDataset_206",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "DestinationDataset_206",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    }
+                ],
+                "annotations": [],
+                "lastPublishTime": "2021-03-21T16:03:40Z"
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/datasets/SourceDataset_206')]",
+                "[concat(variables('factoryId'), '/datasets/DestinationDataset_206')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/CSV_to_SQL')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Copy_dzg",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [
+                            {
+                                "name": "Destination",
+                                "value": "dbo.Orders"
+                            }
+                        ],
+                        "typeProperties": {
+                            "source": {
+                                "type": "DelimitedTextSource",
+                                "storeSettings": {
+                                    "type": "HttpReadSettings",
+                                    "requestMethod": "GET"
+                                },
+                                "formatSettings": {
+                                    "type": "DelimitedTextReadSettings",
+                                    "skipLineCount": 0
+                                }
+                            },
+                            "sink": {
+                                "type": "AzureSqlSink"
+                            },
+                            "enableStaging": false,
+                            "translator": {
+                                "type": "TabularTranslator",
+                                "mappings": [
+                                    {
+                                        "source": {
+                                            "name": "Id",
+                                            "type": "String",
+                                            "physicalType": "String"
+                                        },
+                                        "sink": {
+                                            "name": "Id",
+                                            "type": "Guid",
+                                            "physicalType": "uniqueidentifier"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "User",
+                                            "type": "String",
+                                            "physicalType": "String"
+                                        },
+                                        "sink": {
+                                            "name": "User",
+                                            "type": "String",
+                                            "physicalType": "nvarchar"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "Date",
+                                            "type": "String",
+                                            "physicalType": "String"
+                                        },
+                                        "sink": {
+                                            "name": "Date",
+                                            "type": "DateTime",
+                                            "physicalType": "datetime"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "IcecreamId",
+                                            "type": "String",
+                                            "physicalType": "String"
+                                        },
+                                        "sink": {
+                                            "name": "IcecreamId",
+                                            "type": "Int32",
+                                            "physicalType": "int"
+                                        }
+                                    }
+                                ],
+                                "typeConversion": true,
+                                "typeConversionSettings": {
+                                    "allowDataTruncation": true,
+                                    "treatBooleanAsNumber": false
+                                }
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "SourceDataset_dzg",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "DestinationDataset_dzg",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    }
+                ],
+                "annotations": [],
+                "lastPublishTime": "2021-03-21T16:10:30Z"
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/datasets/SourceDataset_dzg')]",
+                "[concat(variables('factoryId'), '/datasets/DestinationDataset_dzg')]"
+            ]
+        }
+    ]
+}

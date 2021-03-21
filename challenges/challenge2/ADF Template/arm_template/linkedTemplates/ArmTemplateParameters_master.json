@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "value": "ColdStart"
+        },
+        "AzureSqlColdStart_connectionString": {
+            "value": ""
+        },
+        "ColdStartCSV_properties_typeProperties_url": {
+            "value": "https://raw.githubusercontent.com/ColdStart-Challenge/ColdStart-Challenge-2021/main/challenges/challenge2/starter/data/coldstart-orders-historical.csv"
+        },
+        "JSON Catalog_properties_typeProperties_url": {
+            "value": "https://raw.githubusercontent.com/ColdStart-Challenge/ColdStart-Challenge-2021/main/challenges/challenge1/starter/coldstartapp/api/shared/catalog.json"
+        },
+        "containerUri": {
+            "value": ""
+        },
+        "containerSasToken": {
+            "value": ""
+        }
+    }
+}
