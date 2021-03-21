@@ -11,6 +11,8 @@
     {
       "route": "/api/catalog"
     },
+    { "route": "/api/personalizer"
+    },
     {
       "route": "/api/*",
       "allowedRoles": ["authenticated"]
