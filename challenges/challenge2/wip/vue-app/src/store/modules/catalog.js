@@ -3,7 +3,7 @@ import API from '../config';
 import { parseList } from './action-utils';
 import {
   GET_CATALOG,
-  GET_PERSONALIZER
+  GET_PERSONALIZER,
 } from './mutation-types';
 
 const captains = console;
@@ -13,15 +13,15 @@ export default {
   namespaced: true,
   state: {
     catalog: [],
-    recommended: []
+    recommended: [],
   },
   mutations: {
     [GET_CATALOG](state, catalog) {
       state.catalog = catalog;
     },
-    [GET_PERSONALIZER](state, recommended){
+    [GET_PERSONALIZER](state, recommended) {
       state.recommended = recommended;
-    }
+    },
   },
   actions: {
     async getCatalogAction({ commit }) {
@@ -35,7 +35,7 @@ export default {
         throw new Error(error);
       }
     },
-    async getPersonalizerAction({ commit }){
+    async getPersonalizerAction({ commit }) {
       try {
         const response = await axios.get(`${API}/personalizer`);
         const recommended = parseList(response);
@@ -45,7 +45,7 @@ export default {
         captains.error(error);
         throw new Error(error);
       }
-    }
+    },
   },
   getters: {
     catalog: (state) => state.catalog,

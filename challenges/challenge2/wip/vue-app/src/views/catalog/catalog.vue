@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     ...mapGetters('catalog', { catalog: 'catalog' }),
-    ...mapGetters('catalog', { recommended: 'recommended'}),
+    ...mapGetters('catalog', { recommended: 'recommended' }),
   },
   methods: {
     ...mapActions('icecreams', ['buyIcecreamAction']),
@@ -63,14 +63,14 @@ export default {
         this.errorMessage = 'Unauthorized';
       }
     },
-    async getPersonalizer(){
+    async getPersonalizer() {
       this.errorMessage = undefined;
       try {
         await this.getPersonalizerAction();
       } catch (error) {
         this.errorMessage = 'Unauthorized';
       }
-    }
+    },
   },
 };
 </script>
