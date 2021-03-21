@@ -7,6 +7,8 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
+    "mssql": "^6.3.1",
+    "tedious": "^11.0.6",
     "uuid": "^8.3.2"
   },
   "devDependencies": {}
