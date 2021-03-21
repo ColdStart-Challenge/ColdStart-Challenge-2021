@@ -1,6 +1,7 @@
-const uuidv1 = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const data = require('../shared/catalog-data');
 const { config } = require('../shared/config');
+const { getUser } = require('../shared/user-utils');
 
 const Personalizer = require('@azure/cognitiveservices-personalizer');
 const CognitiveServicesCredentials = require('@azure/ms-rest-azure-js').CognitiveServicesCredentials;
@@ -16,10 +17,10 @@ const serviceKey = config.azure_personalizer_key;
 const baseUri = config.azure_personalizer_url;
 
 function getContext(req) {
-    const browser = browserDetect(req.headers['user-agent']);
+    const browserType = browserDetect(req.headers['user-agent']);
     
     let date = new Date();
-    let day = date.getDay();
+    let dayOfWeek = date.getDay();
     let hours = date.getHours();
     let timeOfDay = "";
 
@@ -33,7 +34,7 @@ function getContext(req) {
         timeOfDay  = "Night";
     }
     
-    const loggedIn = getUser(req).userDetails == "John Doe" ? 0 : 1;
+    const loggedInStatus = getUser(req).userDetails == "John Doe" ? 0 : 1;
 
     console.log("Browser: " + browserType);
     console.log("Time: " + timeOfDay);
@@ -84,7 +85,7 @@ async function getActionsList() {
         let rankRequest = {}
 
         // Generate an ID to associate with the request.
-        rankRequest.eventId = uuid();
+        rankRequest.eventId = uuidv4();
 
         // Get context information from the user.
         rankRequest.contextFeatures = getContext(req);
@@ -117,6 +118,7 @@ async function getActionsList() {
 
     } 
     catch (error) {
+        console.error(error);
         context.res.status(500).send(error);
     }
 }

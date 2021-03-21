@@ -18,7 +18,7 @@ async function getCatalog() {
     let result = await pool.request()
       .query("SELECT * FROM [dbo].[IceCreams]");
 
-    console.dir(result);
+    // console.dir(result);
     sql.close();
     return result.recordset;
   } catch (err) {

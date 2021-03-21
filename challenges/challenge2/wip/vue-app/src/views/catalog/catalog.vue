@@ -31,8 +31,8 @@ export default {
     ...mapGetters('catalog', { catalog: 'catalog' }),
     ...mapGetters('catalog', { recommended: 'recommended' }),
     recommendation() {
-      const id = Number.parseInt(this.recommended.Id, 10);
-      return this.catalog.filter((x) => x.Id === id)[0];
+      const id = Number.parseInt(this.recommended[0].Id, 10);
+      return this.catalog.filter((x) => x.Id === id);
     },
   },
   methods: {
@@ -72,6 +72,7 @@ export default {
       try {
         await this.getPersonalizerAction();
       } catch (error) {
+        console.error(error);
         this.errorMessage = 'Unauthorized';
       }
     },
