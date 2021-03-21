@@ -45,7 +45,7 @@ export default {
         captains.error(error);
         throw new Error(error);
       }
-    }
+    },
   },
   getters: {
     catalog: (state) => state.catalog,
