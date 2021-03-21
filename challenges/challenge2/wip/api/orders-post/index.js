@@ -1,32 +1,25 @@
 const { getUser } = require('../shared/user-utils');
-var uuid = require('uuid');
-
+const { config } = require('../shared/config');
+const sql = require('mssql');
 
 module.exports = async function (context, req) {
   // Get the user details from the request
   const user = getUser(req);
 
-  // Build the pre-order JSON from the request
-  const order = {
-    Id: uuid.v4(),
-    User: user.userDetails,
-    FullAddress: req.body.ShippingAddress,
-    Date: new Date().toISOString(),
-    IcecreamId: req.body.Id,
-    Status: "New",
-    DriverId: null,
-    LastPosition: null
-  };
-
   try {
-    // Add the pre-order JSON document in a queue
-    console.log('Queueing order');
-    context.bindings.myQueueItem = order;
+    let pool = await sql.connect(config.azure_sql_connectionstring);
+    let qry = await pool.request()
+      .input("user", sql.VarChar, user.userDetails)
+      .input("iceCreamId", sql.Int, req.body.Id)
+      .input("fullAddress", sql.VarChar, req.body.ShippingAddress)
+      .query("INSERT INTO [dbo].[Orders] ([User], [IcecreamId], [FullAddress]) VALUES (@user, @iceCreamId, @fullAddress)");
 
-    context.res.status(201).json(order);
+    sql.close();
+    context.res.status(201);
     context.done();
-  } catch (error) {
-    console.error(error);
-    context.res.status(500).send(error);
+  } catch (err) {
+    console.error(err);
+    sql.close();
+    context.res.status(500).send(err);
   }
 };

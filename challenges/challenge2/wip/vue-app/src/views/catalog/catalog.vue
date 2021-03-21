@@ -15,6 +15,7 @@ export default {
       routePath: '/catalog',
       showModal: false,
       title: 'Our Ice Creams',
+      personalizerTitle: 'Products you might like:',
     };
   },
   components: {
@@ -24,13 +25,20 @@ export default {
   },
   async created() {
     await this.getCatalog();
+    await this.getPersonalizerAction();
   },
   computed: {
     ...mapGetters('catalog', { catalog: 'catalog' }),
+    ...mapGetters('catalog', { recommended: 'recommended' }),
+    recommendation() {
+      const id = Number.parseInt(this.recommended[0].Id, 10);
+      return this.catalog.filter((x) => x.Id === id);
+    },
   },
   methods: {
     ...mapActions('icecreams', ['buyIcecreamAction']),
     ...mapActions('catalog', ['getCatalogAction']),
+    ...mapActions('catalog', ['getPersonalizerAction']),
     askToBuy(icecream) {
       this.icecreamToBuy = icecream;
       this.showModal = true;
@@ -59,12 +67,32 @@ export default {
         this.errorMessage = 'Unauthorized';
       }
     },
+    async getPersonalizer() {
+      this.errorMessage = undefined;
+      try {
+        await this.getPersonalizerAction();
+      } catch (error) {
+        console.error(error);
+        this.errorMessage = 'Unauthorized';
+      }
+    },
   },
 };
 </script>
 
 <template>
   <div class="content-container">
+    <ListHeader :title="personalizerTitle" @refresh="getPersonalizer" :routePath="routePath">
+    </ListHeader>
+    <div class="columns is-multiline is-variable">
+      <div class="column" v-if="recommended">
+        <CatalogList
+          :icecreams="recommendation"
+          :errorMessage="errorMessage"
+          @bought="askToBuy($event)"
+        ></CatalogList>
+      </div>
+    </div>
     <ListHeader :title="title" @refresh="getCatalog" :routePath="routePath">
     </ListHeader>
     <div class="columns is-multiline is-variable">
