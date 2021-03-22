@@ -12,6 +12,13 @@
       "type": "http",
       "direction": "out",
       "name": "res"
+    },
+    {
+      "type": "queue",
+      "direction": "out",
+      "name": "myQueueItem",
+      "queueName": "preorder",
+      "connection": "AZURE_STORAGE_CONNECTION_STRING"
     }
   ]
 }
