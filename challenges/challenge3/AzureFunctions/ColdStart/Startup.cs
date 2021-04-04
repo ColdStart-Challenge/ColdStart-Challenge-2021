@@ -1,9 +1,7 @@
-﻿using ColdStart.Repositories;
+﻿using ColdStart.Repositories.CosmosDB;
+using ColdStart.Repositories.SQL;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 [assembly: FunctionsStartup(typeof(ColdStart.Startup))]
 
@@ -14,6 +12,7 @@ namespace ColdStart
         public override void Configure(IFunctionsHostBuilder builder)
         {
             builder.Services.AddTransient<ICatalogRepository, CatalogRepository>();
+            builder.Services.AddTransient<IOrderDocumentRepository, OrderDocumentRepository>();
         }
     }
 }

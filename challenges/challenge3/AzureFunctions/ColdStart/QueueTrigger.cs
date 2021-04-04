@@ -1,32 +1,27 @@
-using System;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
-using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
-using System.Configuration;
-using System.Collections.Generic;
-using System.Net;
-using Microsoft.Azure.Cosmos;
-using Newtonsoft.Json;
-using ColdStart.Repositories;
-using ColdStart.Models.Queue;
 using ColdStart.Models.CosmosDB;
+using ColdStart.Models.Queue;
+using ColdStart.Repositories.CosmosDB;
+using ColdStart.Repositories.SQL;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace ColdStart
 {
     public class QueueTrigger
     {
         private ICatalogRepository _catalogRepository;
-        
-        public QueueTrigger(ICatalogRepository catalogRepository)
+        private IOrderDocumentRepository _orderDocumentRepository;
+
+        public QueueTrigger(ICatalogRepository catalogRepository, IOrderDocumentRepository orderDocumentRepository)
         {
             _catalogRepository = catalogRepository;
+            _orderDocumentRepository = orderDocumentRepository;
         }
         
         [FunctionName("QueueTrigger")]
-        public async Task Run([QueueTrigger("customer-orders", Connection = "QueueStorage")]string myQueueItem,
-            //[CosmosDB(databaseName: "thezoocoldstart", collectionName: "coldstart", ConnectionStringSetting = "EndpointUri", PartitionKey = "PrimaryKey", CreateIfNotExists = false)] string result,
-            ILogger log)
+        public async Task Run([QueueTrigger("customer-orders", Connection = "QueueStorage")]string myQueueItem, ILogger log)
         {
             var queuedOrder = JsonConvert.DeserializeObject<OrderQueueItem>(myQueueItem);
             log.LogInformation(myQueueItem);
@@ -46,13 +41,9 @@ namespace ColdStart
                 lastPosition = null
             };
 
-            var cosmosClient = new CosmosClient(Environment.GetEnvironmentVariable("EndpointUri"), Environment.GetEnvironmentVariable("PrimaryKey"));
-            var db = cosmosClient.GetDatabase("thezoocoldstart");
-            var container = db.GetContainer("coldstart");
-            await container.CreateItemAsync<Order>(document, new PartitionKey(document.id.ToString()));
+            await _orderDocumentRepository.AcceptOrder(document);
 
             log.LogInformation("Done");
-            //log.LogInformation($"C# Queue trigger function processed: {myQueueItem}");
         }
     }
 }
