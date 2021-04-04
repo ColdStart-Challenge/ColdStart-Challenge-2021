@@ -1,5 +1,6 @@
 ﻿using ColdStart.Repositories.CosmosDB;
 using ColdStart.Repositories.SQL;
+using ColdStart.Services;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +14,7 @@ namespace ColdStart
         {
             builder.Services.AddTransient<ICatalogRepository, CatalogRepository>();
             builder.Services.AddTransient<IOrderDocumentRepository, OrderDocumentRepository>();
+            builder.Services.AddTransient<IAzureMapsService, AzureMapsService>();
         }
     }
 }

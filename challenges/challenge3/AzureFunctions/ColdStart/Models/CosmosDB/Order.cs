@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Azure.Cosmos.Spatial;
+using System;
 
 namespace ColdStart.Models.CosmosDB
 {
@@ -11,8 +12,8 @@ namespace ColdStart.Models.CosmosDB
         public string status { get; set; }
         public Driver driver { get; set; }
         public string fullAddress { get; set; }
-        public string deliveryPosition { get; set; }
-        public string lastPosition { get; set; }
+        public Point deliveryPosition { get; set; }
+        public Point lastPosition { get; set; }
     }
 
     public class Icecream

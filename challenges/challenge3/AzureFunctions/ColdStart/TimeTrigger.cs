@@ -1,4 +1,5 @@
 using ColdStart.Repositories.CosmosDB;
+using ColdStart.Services;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,10 +10,12 @@ namespace ColdStart
     public class TimeTrigger
     {
         private IOrderDocumentRepository _orderDocumentRepository;
+        private IAzureMapsService _azureMapsService;
 
-        public TimeTrigger(IOrderDocumentRepository orderDocumentRepository)
+        public TimeTrigger(IOrderDocumentRepository orderDocumentRepository, IAzureMapsService azureMapsService)
         {
             _orderDocumentRepository = orderDocumentRepository;
+            _azureMapsService = azureMapsService;
         }
         
         [FunctionName("TimeTrigger")]
@@ -24,6 +27,8 @@ namespace ColdStart
             foreach (var order in acceptedOrders)
             {
                 order.status = "Ready";
+                order.deliveryPosition = await _azureMapsService.GetAddressCoordinates(order.fullAddress);
+
                 await _orderDocumentRepository.UpsertOrder(order);
             }
 
