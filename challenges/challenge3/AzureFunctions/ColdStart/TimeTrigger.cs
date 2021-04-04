@@ -1,53 +1,38 @@
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using Microsoft.Azure.Cosmos;
+using ColdStart.Repositories.CosmosDB;
+using ColdStart.Services;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace ColdStart
 {
-    public static class TimeTrigger
+    public class TimeTrigger
     {
+        private IOrderDocumentRepository _orderDocumentRepository;
+        private IAzureMapsService _azureMapsService;
+
+        public TimeTrigger(IOrderDocumentRepository orderDocumentRepository, IAzureMapsService azureMapsService)
+        {
+            _orderDocumentRepository = orderDocumentRepository;
+            _azureMapsService = azureMapsService;
+        }
+        
         [FunctionName("TimeTrigger")]
-        public static async void Run([TimerTrigger("5,25,45 * * * * *")]TimerInfo myTimer, ILogger log)
+        public async Task Run([TimerTrigger("5,25,45 * * * * *")] TimerInfo myTimer, ILogger log)
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 
-            var cosmosClient = new CosmosClient(Environment.GetEnvironmentVariable("EndpointUri"), Environment.GetEnvironmentVariable("PrimaryKey"));
-
-            var db = cosmosClient.GetDatabase("thezoocoldstart");
-            var container = db.GetContainer("coldstart");
-
-            var sqlQueryText = "SELECT * FROM c WHERE c.status = 'Accepted'";
-
-            Console.WriteLine("Running query: {0}\n", sqlQueryText);
-
-            var queryDefinition = new QueryDefinition(sqlQueryText);
-            var queryResultSetIterator = container.GetItemQueryIterator<Root>(queryDefinition);
-
-            var orders = new List<Root>();
-
-            while (queryResultSetIterator.HasMoreResults)
-            {
-                FeedResponse<Root> currentResultSet = await queryResultSetIterator.ReadNextAsync();
-                foreach (Root root in currentResultSet)
-                {
-                    orders.Add(root);
-                    Console.WriteLine("\tRead {0}\n", root);
-                }
-            }
-
-            foreach(var order in orders)
+            var acceptedOrders = await _orderDocumentRepository.GetAcceptedOrders();
+            foreach (var order in acceptedOrders)
             {
                 order.status = "Ready";
+                order.deliveryPosition = await _azureMapsService.GetAddressCoordinates(order.fullAddress);
 
-                var response = container.UpsertItemAsync<Root>(order, new PartitionKey(order.id));
+                await _orderDocumentRepository.UpsertOrder(order);
             }
 
             log.LogInformation("Done");
-
         }
     }
 }
