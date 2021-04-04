@@ -1,7 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
+    <UserSecretsId>1617b936-0209-4bf8-bf93-d266fcdf5bc3</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AzureMapsRestToolkit" Version="6.0.0" />

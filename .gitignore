@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/challenges/challenge3/AzureFunctions/ColdStart/Properties/PublishProfiles
+/challenges/challenge3/AzureFunctions/ColdStart/Properties/ServiceDependencies/ColdStartAzureFunction - Web Deploy
+/challenges/challenge3/AzureFunctions/ColdStart/Properties/serviceDependencies.ColdStartAzureFunction - Web Deploy.json
