@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="ColdStartChallenge.DriverApp.Pages.LoginPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ColdStartChallenge.DriverApp.Controls"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Behaviors>
+        <xct:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+        <xct:EventToCommandBehavior Command="{Binding DisappearingCommand}" EventName="Disappearing" />
+    </ContentPage.Behaviors>
+    <ContentPage.Content>
+        <Grid>
+            <Grid VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
+                </Grid.RowDefinitions>
+                <Image Margin="25" Source="COLDSTART_LOGO_black.png" />
+            </Grid>
+
+            <StackLayout Margin="20,0,20,0"
+                         Padding="10"
+                         BackgroundColor="{StaticResource ColorBackground}"
+                         HorizontalOptions="FillAndExpand"
+                         Spacing="5"
+                         VerticalOptions="CenterAndExpand">
+                <Label Text="Username" />
+                <Entry Text="{Binding UserName, Mode=TwoWay}" />
+                <Label Margin="0,5,0,0" Text="Password" />
+                <Entry IsPassword="True" Text="{Binding Password, Mode=TwoWay}" />
+                <StackLayout HorizontalOptions="Start" Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding RememberMe}" />
+                    <Label Text="Remember me" VerticalOptions="Center" />
+                </StackLayout>
+                <Button Margin="0,20,0,0"
+                        Command="{Binding LoginCommand}"
+                        IsEnabled="{Binding CanLogin}"
+                        Text="Login" />
+            </StackLayout>
+
+            <controls:LoadingView IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

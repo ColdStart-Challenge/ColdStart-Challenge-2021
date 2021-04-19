@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="ColdStartChallenge.DriverApp.Pages.DashboardPage"
+             x:Name="Dashboard"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ColdStartChallenge.DriverApp.Controls"
+             xmlns:models="clr-namespace:ColdStartChallenge.DriverApp.Models"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             Title="Cold Start"
+             BackgroundColor="{StaticResource ColorBackground}">
+    <ContentPage.Behaviors>
+        <xct:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+        <xct:EventToCommandBehavior Command="{Binding DisappearingCommand}" EventName="Disappearing" />
+    </ContentPage.Behaviors>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Margin="0,10,0,0"
+                         Grid.Row="0">
+                <Label Margin="20,0,0,5"
+                        FontSize="Large"
+                        Style="{DynamicResource TitleStyle}"
+                        Text="{Binding Greeting}"
+                        TextColor="{StaticResource ColorPrimaryDark}" />
+                <Label Margin="20,0,0,10"
+                        FontSize="Small"
+                        Text="{Binding Place}" />
+
+                <Label TextColor="{StaticResource ColorPrimaryDark}"
+                       IsVisible="{Binding IsDeliveringVisible}"
+                       Margin="20,0,20,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Your currenct delivery" FontAttributes="Bold" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <StackLayout BindableLayout.ItemsSource="{Binding DeliveringOrders}" Margin="0,5,0,-5">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid RowSpacing="5" Margin="0,0,0,5">
+                                <BoxView Margin="20,5,20,5"
+                                            CornerRadius="10"
+                                            Color="{StaticResource ColorPrimary}" />
+
+                                <Grid Margin="20,10,20,10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0"
+                                            Grid.Column="0"
+                                            Margin="10,0,0,0"
+                                            Style="{DynamicResource TitleStyle}"
+                                            Text="{Binding User}" />
+                                    <Label Grid.Row="1"
+                                            Grid.Column="0"
+                                            Margin="10,0,0,0"
+                                            Style="{DynamicResource SubtitleStyle}"
+                                            Text="{Binding FullAddress}" />
+                                    <Label Grid.Row="2"
+                                            Grid.Column="1"
+                                            Margin="0,0,10,0"
+                                            HorizontalOptions="End"
+                                            Style="{DynamicResource CaptionStyle}"
+                                            Text="{Binding Date, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}" />
+
+                                    <Label Grid.Row="0"
+                                            Grid.RowSpan="2"
+                                            Grid.Column="1"
+                                            Margin="0,2,5,0"
+                                            HorizontalOptions="End"
+                                            Style="{StaticResource MaterialLabel}"
+                                            Text="{Binding StatusIcon}"
+                                            TextColor="{Binding StatusColor}" />
+                                </Grid>
+
+                                <Button Style="{StaticResource TransparentButton}"
+                                        Command="{Binding Source={x:Reference Dashboard}, Path=BindingContext.DeliveyItemSelectedCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </StackLayout>
+            <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
+                         Grid.Row="1">
+                <CollectionView x:Name="DeliveryList"
+                                Margin="0,10,0,10"
+                                ItemsSource="*** BIND TO CORRECT PROPERTY ***"
+                                SelectedItem="*** BIND TO CORRECT PROPERTY ***"
+                                SelectionChangedCommand="*** BIND TO CORRECT PROPERTY ***"
+                                SelectionMode="*** BIND TO CORRECT PROPERTY ***">
+                </CollectionView>
+            </RefreshView>
+            <controls:LoadingView IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

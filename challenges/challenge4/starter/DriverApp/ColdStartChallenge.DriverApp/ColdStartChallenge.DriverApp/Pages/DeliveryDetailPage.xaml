@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="ColdStartChallenge.DriverApp.Pages.DeliveryDetailPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             Title="{Binding Order.Name}"
+             BackgroundColor="{StaticResource ColorBackground}">
+    <ContentPage.Behaviors>
+        <xct:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+        <xct:EventToCommandBehavior Command="{Binding DisappearingCommand}" EventName="Disappearing" />
+    </ContentPage.Behaviors>
+    <ContentPage.Content>
+        <Grid Margin="20" RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="180" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label TextColor="{StaticResource ColorPrimaryDark}">Order for:</Label>
+
+            <BoxView Grid.Row="1"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     CornerRadius="10"
+                     Color="{StaticResource ColorPrimary}" />
+
+            <StackLayout Grid.Row="1"
+                         Grid.Column="0"
+                         Margin="10"
+                         Spacing="5">
+                <Label Text="{Binding Order.User}" />
+                <Label Text="{Binding Order.FullAddress}" />
+                <Label Style="{DynamicResource CaptionStyle}" Text="{Binding Order.Date, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}" />
+            </StackLayout>
+
+            <Image Grid.Row="1"
+                   Grid.Column="1"
+                   Margin="10,20,20,20"
+                   HorizontalOptions="End"
+                   Source="{Binding Order.Icecream.ImageUrl}" />
+
+            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                    Margin="0,20,0,0"
+                    IsVisible="{Binding IsStatusVisible}"
+                    Command="{Binding SaveCommand}"
+                    Text="{Binding Status}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
