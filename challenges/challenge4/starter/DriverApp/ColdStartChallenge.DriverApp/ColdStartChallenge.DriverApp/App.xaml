@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application x:Class="ColdStartChallenge.DriverApp.App"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:conv="clr-namespace:ColdStartChallenge.DriverApp.Converters"
+             xmlns:resources="clr-namespace:ColdStartChallenge.DriverApp.Resources">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:Styles />
+            </ResourceDictionary.MergedDictionaries>
+            <conv:SelectedSortOptionToColorConverter x:Key="selectedSortOptionToColorConverter" />
+            <xct:InvertedBoolConverter x:Key="invertedBoolConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

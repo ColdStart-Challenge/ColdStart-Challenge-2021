@@ -1,0 +1,14 @@
+{
+  "name": "coldstartapi",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "@azure/cosmos": "^3.9.5",
+    "tedious": "^11.0.3"
+  },
+  "devDependencies": {}
+}
