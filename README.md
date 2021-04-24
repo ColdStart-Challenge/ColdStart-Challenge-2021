@@ -28,12 +28,12 @@ This coding challenge is being organized in a collaboration between Microsoft an
 
 | Date | Challenge | Description | Solution |
 | ---- | --------- | ----------- | -------- |
-| Feb 22, 2021 | [Challenge 1](./challenges/challenge1/README.md) | Getting ColdStart online 🌎 | [Solution 1](./challenges/challenge1/finished) |
-| Mar 8, 2021 | [Challenge 2](./challenges/challenge2/README.md) | Getting serious about Data 📂 | [Solution 2](./challenges/challenge2/finished) |
-| Mar 22, 2021 | [Challenge 3](./challenges/challenge3/README.md) | Fire up the production lines 🏭 | |
-| Apr 5, 2021 | Challenge 4 |  | |
-| Apr 19, 2021 | Challenge 5 |  | |
-| May 3, 2021 | Challenge 6 |  | |
+| Feb 22, 2021 | [Challenge 1](./challenges/challenge1) | Getting ColdStart online 🌎 | [Solution 1](./challenges/challenge1/finished) |
+| Mar 8, 2021 | [Challenge 2](./challenges/challenge2) | Getting serious about Data 📂 | [Solution 2](./challenges/challenge2/finished) |
+| Mar 22, 2021 | [Challenge 3](./challenges/challenge3) | Fire up the production lines 🏭 | [Solution 3](./challenges/challenge3/finished) |
+| Apr 19, 2021 | [Challenge 4](./challenges/challenge4) | Bring it to me 🚚 | |
+| May 3, 2021 | Challenge 5 |  | |
+| May 17, 2021 | Challenge 6 |  | |
 
 ## <a name="backstory"></a>What's the back story of ColdStart?
 

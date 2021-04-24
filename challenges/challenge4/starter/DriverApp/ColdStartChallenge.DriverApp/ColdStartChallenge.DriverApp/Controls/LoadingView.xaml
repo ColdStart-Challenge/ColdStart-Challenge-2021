@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid x:Class="ColdStartChallenge.DriverApp.Controls.LoadingView"
+      xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      BackgroundColor="#AAEFEFEF"
+      HorizontalOptions="Fill"
+      IsVisible="{Binding IsBusy}"
+      VerticalOptions="Fill">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="2*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="2*" />
+    </Grid.RowDefinitions>
+    <Image x:Name="TruckImage"
+           Grid.Row="1"
+           HorizontalOptions="Start"
+           Source="Truck.png"
+           VerticalOptions="Fill" />
+    <Label x:Name="LoadingText"
+           Grid.Row="2"
+           FontAttributes="Bold"
+           HorizontalOptions="Center"
+           Text="Loading..."
+           TextColor="{StaticResource ColorPrimaryDark}"
+           VerticalOptions="Start" />
+</Grid>
