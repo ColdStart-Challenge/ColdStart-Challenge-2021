@@ -1,0 +1,60 @@
+﻿@page "/"
+
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject OrdersClient OrdersClient
+
+<AuthorizeView>
+    <Authorized>
+        <div class="main">
+            <TemplatedList Loader="@LoadOrders" ListGroupClass="orders-list">
+                <Loading>Loading...</Loading>
+                <Empty>
+                    <h2>No orders placed</h2>
+                </Empty>
+                <Item Context="item">
+                    <div class="col">
+                        <h5>@item.Date.ToLongDateString()</h5>
+                        <span>
+                            <img height="40" src="@item.IceCream?.ImageUrl" />
+                            @item.IceCream?.Name
+                        </span>
+                    </div>
+                    <div class="col">
+                        Status: <strong>@item.Status</strong>
+                    </div>
+                    <div class="col flex-grow-0">
+                        <a href="orders/@item.Id" class="btn btn-success">
+                            Track &gt;
+                        </a>
+                    </div>
+                </Item>
+            </TemplatedList>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <h1>Log in to view your orders</h1>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    private ClaimsPrincipal AuthenticationStateUser { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        AuthenticationState authenticationState;
+
+        authenticationState = await authenticationStateTask;
+        this.AuthenticationStateUser = authenticationState.User;
+
+    }
+
+    async Task<IEnumerable<Order>> LoadOrders()
+    {
+        Console.WriteLine(this.AuthenticationStateUser);
+        return await OrdersClient.GetOrders(this.AuthenticationStateUser.FindFirst(c => c.Type.Contains("nameidentifier"))?.Value);
+    }
+}
