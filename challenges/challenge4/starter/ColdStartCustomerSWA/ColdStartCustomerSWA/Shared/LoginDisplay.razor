@@ -1,0 +1,16 @@
+﻿<div class="user-info">
+    <AuthorizeView>
+        <Authorizing>
+            <text>...</text>
+        </Authorizing>
+        <Authorized>
+            <div>
+                <p class="username">Welcome @context.User.Identity.Name</p>
+                <a class="btn btn-link sign-out" href="/.auth/logout?post_logout_redirect_uri=/">Sign out</a>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <a class="sign-in" href="/login-providers">Log in</a>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>
