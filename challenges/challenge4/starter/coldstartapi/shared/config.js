@@ -9,14 +9,14 @@ const config = {
 const sqlConfig = {
     authentication: {
         options: {
-            userName: process.env.SQL_USERNAME,
-            password: process.env.SQL_PASSWORD,
+            userName: process.env.AZURE_SQL_USER,
+            password: process.env.AZURE_SQL_PASSWORD,
         },
         type: "default"
     },
-    server: process.env.SQL_SERVERNAME,
+    server: process.env.AZURE_SQL_SERVERNAME,
     options: {
-        database: "coldstartsql",
+        database: "ColdStart",
         encrypt: true
     }
 };
@@ -24,8 +24,8 @@ const sqlConfig = {
 const cosmosConfig = {
     cosmosdb_endpoint: process.env.COSMOSDB_ENDPOINT,
     cosmosdb_key: process.env.COSMOSDB_KEY,
-    cosmosdb_databaseId: "coldstartdb",
-    cosmosdb_ordersContainerId: "customerorders",
+    cosmosdb_databaseId: "thezoocoldstart",
+    cosmosdb_ordersContainerId: "coldstart",
     cosmosdb_ordersPartitionKey: "id",
 };
 

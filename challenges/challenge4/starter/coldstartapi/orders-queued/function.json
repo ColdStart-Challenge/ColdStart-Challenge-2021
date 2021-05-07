@@ -1,11 +1,1 @@
-{
-  "bindings": [
-    {
-      "name": "myQueueItem",
-      "type": "queueTrigger",
-      "direction": "in",
-      "queueName": "customer-orders",
-      "connection": "coldstartsa_STORAGE"
-    }
-  ]
-}
+
