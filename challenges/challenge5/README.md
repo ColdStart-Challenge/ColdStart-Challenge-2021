@@ -36,8 +36,10 @@ temp - temperature in Celsius
 atemp - "feels like" temperature in Celsius
 humidity - relative humidity
 windspeed - wind speed
-count - number of total rentals
+count - number of total sales
 ```
+
+> Note: we have used the [Bike Sharing demand Kaggle dataset](https://www.kaggle.com/c/bike-sharing-demand) as a basis for our dataset.
 
 The second objective is then to **take the trained model and deploy it as a REST endpoint**. With Azure Machine Learning you can easily package your model as a Docker container and deploy to for example Azure Kubernetes Service or Azure Container Instances.
 
